@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-03 06:07:15
- * @LastEditTime: 2023-04-03 20:04:48
+ * @LastEditTime: 2023-04-06 18:59:32
  * @LastEditors: HH
  * @Description: 
  * @FilePath: /WebREST/WebREST/server/echo.cc
@@ -19,6 +19,7 @@ EchoServer::EchoServer(EventLoop* loop, const InetAddress& listen_addr):
 {
     tcp_server_.set_connection_callback(std::bind(&EchoServer::onConnection, this, _1));
     tcp_server_.set_message_callback(std::bind(&EchoServer::onMessage, this, _1));
+    tcp_server_.set_thread_num(8);
 }
 
 #endif

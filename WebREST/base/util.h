@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 02:07:40
- * @LastEditTime: 2023-04-02 04:23:45
+ * @LastEditTime: 2023-04-05 00:51:03
  * @LastEditors: HH
  * @Description: 一些自定义简短类型与函数
- * @FilePath: /WebREST/WebREST/util/util.h
+ * @FilePath: /WebREST/WebREST/base/util.h
  */
 
 #ifndef WebREST_UTIL_H_
