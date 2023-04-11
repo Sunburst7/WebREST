@@ -1,0 +1,1 @@
+/usr/bin/c++  -O0   CMakeFiles/echo_test.dir/echo_test.cc.o  -o ../bin/echo_test  ../lib/libWebREST-static.a -lpthread 

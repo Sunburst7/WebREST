@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 01:52:54
- * @LastEditTime: 2023-04-04 01:01:23
+ * @LastEditTime: 2023-04-09 02:27:38
  * @LastEditors: HH
  * @Description: echo server
  * @FilePath: /WebREST/WebREST/server/echo.h
@@ -16,6 +16,7 @@
 #include "inet_address.h"
 #include "tcp_server.h"
 #include "tcp_connection.h"
+#include "buffer.h"
 
 namespace WebREST {
 
@@ -44,7 +45,7 @@ private:
     //     printf("echo %d bytes: %s\n", msg.size(), msg.c_str());
     //     conn->send(msg);
     // }
-        // 用户自定义
+
     void onConnection(TcpConnection* conn)
     {
         printf("EchoServer - %s -> %s\n", 
@@ -52,10 +53,9 @@ private:
             conn->local_address().to_ip_port().c_str());
     }
 
-    // 用户自定义
-    void onMessage(TcpConnection* conn)
+    void onMessage(TcpConnection* conn, Buffer* buf)
     {
-        std::string msg(conn->get());
+        std::string msg(buf->retrieve_all_as_string());
         printf("echo %d bytes: %s\n", msg.size(), msg.c_str());
         conn->send(msg);
     }

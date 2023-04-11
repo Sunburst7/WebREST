@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 00:18:22
- * @LastEditTime: 2023-04-03 23:37:09
+ * @LastEditTime: 2023-04-10 04:07:02
  * @LastEditors: HH
  * @Description: 
  * @FilePath: /WebREST/WebREST/core/socket.cc
@@ -64,6 +64,12 @@ int Socket::close(int sockfd)
     int ret = ::close(sockfd);
     assert( ret != -1 );
     return ret;
+}
+
+void Socket::shutdown_write()
+{
+    int ret = ::shutdown(sockfd_, SHUT_WR);
+    assert( ret >= 0 );
 }
 
 #endif

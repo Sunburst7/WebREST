@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 18:41:22
- * @LastEditTime: 2023-04-05 19:04:01
+ * @LastEditTime: 2023-04-09 20:37:57
  * @LastEditors: HH
  * @Description: TCP 服务器类
  * @FilePath: /WebREST/WebREST/core/tcp_server.h
@@ -18,6 +18,7 @@
 #include "tcp_connection.h"
 #include "callback.h"
 #include "inet_address.h"
+#include "buffer.h"
 
 namespace WebREST {
 

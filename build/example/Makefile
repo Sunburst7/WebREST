@@ -68,18 +68,6 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -124,6 +112,18 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
 # The main all target
 all: cmake_check_build_system
 	cd /home/sunburst7/Desktop/WebREST/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/sunburst7/Desktop/WebREST/build/CMakeFiles /home/sunburst7/Desktop/WebREST/build/example/CMakeFiles/progress.marks
@@ -157,46 +157,88 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-example/CMakeFiles/test.dir/rule:
-	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/test.dir/rule
-.PHONY : example/CMakeFiles/test.dir/rule
+example/CMakeFiles/http_test.dir/rule:
+	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/http_test.dir/rule
+.PHONY : example/CMakeFiles/http_test.dir/rule
 
 # Convenience name for target.
-test: example/CMakeFiles/test.dir/rule
+http_test: example/CMakeFiles/http_test.dir/rule
 
-.PHONY : test
+.PHONY : http_test
 
 # fast build rule for target.
-test/fast:
-	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/build
-.PHONY : test/fast
+http_test/fast:
+	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/http_test.dir/build.make example/CMakeFiles/http_test.dir/build
+.PHONY : http_test/fast
 
-test.o: test.cc.o
+# Convenience name for target.
+example/CMakeFiles/echo_test.dir/rule:
+	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/echo_test.dir/rule
+.PHONY : example/CMakeFiles/echo_test.dir/rule
 
-.PHONY : test.o
+# Convenience name for target.
+echo_test: example/CMakeFiles/echo_test.dir/rule
+
+.PHONY : echo_test
+
+# fast build rule for target.
+echo_test/fast:
+	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/echo_test.dir/build.make example/CMakeFiles/echo_test.dir/build
+.PHONY : echo_test/fast
+
+echo_test.o: echo_test.cc.o
+
+.PHONY : echo_test.o
 
 # target to build an object file
-test.cc.o:
-	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/test.cc.o
-.PHONY : test.cc.o
+echo_test.cc.o:
+	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/echo_test.dir/build.make example/CMakeFiles/echo_test.dir/echo_test.cc.o
+.PHONY : echo_test.cc.o
 
-test.i: test.cc.i
+echo_test.i: echo_test.cc.i
 
-.PHONY : test.i
+.PHONY : echo_test.i
 
 # target to preprocess a source file
-test.cc.i:
-	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/test.cc.i
-.PHONY : test.cc.i
+echo_test.cc.i:
+	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/echo_test.dir/build.make example/CMakeFiles/echo_test.dir/echo_test.cc.i
+.PHONY : echo_test.cc.i
 
-test.s: test.cc.s
+echo_test.s: echo_test.cc.s
 
-.PHONY : test.s
+.PHONY : echo_test.s
 
 # target to generate assembly for a file
-test.cc.s:
-	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/test.cc.s
-.PHONY : test.cc.s
+echo_test.cc.s:
+	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/echo_test.dir/build.make example/CMakeFiles/echo_test.dir/echo_test.cc.s
+.PHONY : echo_test.cc.s
+
+http_test.o: http_test.cc.o
+
+.PHONY : http_test.o
+
+# target to build an object file
+http_test.cc.o:
+	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/http_test.dir/build.make example/CMakeFiles/http_test.dir/http_test.cc.o
+.PHONY : http_test.cc.o
+
+http_test.i: http_test.cc.i
+
+.PHONY : http_test.i
+
+# target to preprocess a source file
+http_test.cc.i:
+	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/http_test.dir/build.make example/CMakeFiles/http_test.dir/http_test.cc.i
+.PHONY : http_test.cc.i
+
+http_test.s: http_test.cc.s
+
+.PHONY : http_test.s
+
+# target to generate assembly for a file
+http_test.cc.s:
+	cd /home/sunburst7/Desktop/WebREST/build && $(MAKE) -f example/CMakeFiles/http_test.dir/build.make example/CMakeFiles/http_test.dir/http_test.cc.s
+.PHONY : http_test.cc.s
 
 # Help Target
 help:
@@ -205,15 +247,19 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... install/local"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... test"
-	@echo "... test.o"
-	@echo "... test.i"
-	@echo "... test.s"
+	@echo "... install/local"
+	@echo "... http_test"
+	@echo "... echo_test"
+	@echo "... echo_test.o"
+	@echo "... echo_test.i"
+	@echo "... echo_test.s"
+	@echo "... http_test.o"
+	@echo "... http_test.i"
+	@echo "... http_test.s"
 .PHONY : help
 
 

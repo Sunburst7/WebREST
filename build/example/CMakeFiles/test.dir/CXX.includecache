@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+../WebREST/base/copyable.h
+
+../WebREST/base/non_copyable.h
+
+../WebREST/base/util.h
+
 ../WebREST/core/callback.h
 functional
 -
@@ -27,18 +33,28 @@ non_copyable.h
 ../WebREST/core/non_copyable.h
 
 ../WebREST/core/eventloop.h
+unistd.h
+-
 functional
 -
 assert.h
 -
 sys/epoll.h
 -
+sys/eventfd.h
+-
 thread
+-
+mutex
 -
 vector
 -
+memory
+-
 epoller.h
 ../WebREST/core/epoller.h
+util.h
+../WebREST/core/util.h
 
 ../WebREST/core/inet_address.h
 netinet/in.h
@@ -73,7 +89,11 @@ inet_address.h
 ../WebREST/core/inet_address.h
 
 ../WebREST/core/tcp_server.h
+assert.h
+-
 memory
+-
+iostream
 -
 non_copyable.h
 ../WebREST/core/non_copyable.h
@@ -95,10 +115,6 @@ tcp_server.h
 ../WebREST/server/tcp_server.h
 tcp_connection.h
 ../WebREST/server/tcp_connection.h
-
-../WebREST/util/copyable.h
-
-../WebREST/util/non_copyable.h
 
 /home/sunburst7/Desktop/WebREST/example/test.cc
 iostream

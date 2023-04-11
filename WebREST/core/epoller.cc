@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-01 18:27:11
- * @LastEditTime: 2023-04-03 23:54:42
+ * @LastEditTime: 2023-04-08 23:59:55
  * @LastEditors: HH
  * @Description: 
  * @FilePath: /WebREST/WebREST/core/epoller.cc
@@ -67,15 +67,21 @@ void Epoller::update(int operation, Channel& channel)
 void Epoller::update_channel(Channel& channel)
 {
     int op = 0, events = channel.events();
-    if (events & EPOLLIN) {
-        op = EPOLL_CTL_ADD;
-        set_non_blocking(channel.fd());
-    }
-    else if (events & EPOLLRDHUP)
-        op = EPOLL_CTL_DEL;
-    else {
+    Channel::ChannelState state = channel.state();
+    if ( state == Channel::ChannelState::kNew || state == Channel::ChannelState::kDelete )
+    {
+        channel.set_state(Channel::ChannelState::kAdd);
+        if (events & EPOLLIN) {
+            op = EPOLL_CTL_ADD;
+            set_non_blocking(channel.fd());
+        }
+        else if (events & EPOLLRDHUP)
+            op = EPOLL_CTL_DEL;
+        else {
 
+        }
     }
+
     update(op, channel);
 }
 

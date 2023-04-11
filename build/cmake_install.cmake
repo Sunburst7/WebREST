@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "")
+    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -39,19 +39,27 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/WebREST" TYPE FILE FILES
+    "/home/sunburst7/Desktop/WebREST/WebREST/base/Thread.h"
+    "/home/sunburst7/Desktop/WebREST/WebREST/base/buffer.h"
+    "/home/sunburst7/Desktop/WebREST/WebREST/base/copyable.h"
+    "/home/sunburst7/Desktop/WebREST/WebREST/base/countdown_latch.h"
+    "/home/sunburst7/Desktop/WebREST/WebREST/base/non_copyable.h"
+    "/home/sunburst7/Desktop/WebREST/WebREST/base/util.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/acceptor.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/callback.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/channel.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/epoller.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/eventloop.h"
+    "/home/sunburst7/Desktop/WebREST/WebREST/core/eventloop_thread.h"
+    "/home/sunburst7/Desktop/WebREST/WebREST/core/eventloop_thread_pool.h"
+    "/home/sunburst7/Desktop/WebREST/WebREST/core/http_request.h"
+    "/home/sunburst7/Desktop/WebREST/WebREST/core/http_response.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/inet_address.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/socket.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/tcp_connection.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/tcp_server.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/server/echo.h"
-    "/home/sunburst7/Desktop/WebREST/WebREST/util/copyable.h"
-    "/home/sunburst7/Desktop/WebREST/WebREST/util/non_copyable.h"
-    "/home/sunburst7/Desktop/WebREST/WebREST/util/util.h"
+    "/home/sunburst7/Desktop/WebREST/WebREST/server/http.h"
     )
 endif()
 

@@ -1,0 +1,105 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				},
+				{
+					"build" : "example",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "example",
+					"targetIndexes" : 
+					[
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "WebREST",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "WebREST-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-WebREST-shared-Debug-0e7bbf90ee7ea2466e80.json",
+					"name" : "WebREST-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "WebREST-static::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-WebREST-static-Debug-9d2f2621ed874a90897a.json",
+					"name" : "WebREST-static",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "echo_test::@70983d692f648185febe",
+					"jsonFile" : "target-echo_test-Debug-3b0ab0f616148c7e5de0.json",
+					"name" : "echo_test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "http_test::@70983d692f648185febe",
+					"jsonFile" : "target-http_test-Debug-1ad19c8be8ce88c0d715.json",
+					"name" : "http_test",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/sunburst7/Desktop/WebREST/build",
+		"source" : "/home/sunburst7/Desktop/WebREST"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}

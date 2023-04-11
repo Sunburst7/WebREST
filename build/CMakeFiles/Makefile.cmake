@@ -47,7 +47,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/lightserver-shared.dir/DependInfo.cmake"
-  "CMakeFiles/lightserver-static.dir/DependInfo.cmake"
-  "example/CMakeFiles/test.dir/DependInfo.cmake"
+  "CMakeFiles/WebREST-shared.dir/DependInfo.cmake"
+  "CMakeFiles/WebREST-static.dir/DependInfo.cmake"
+  "example/CMakeFiles/http_test.dir/DependInfo.cmake"
+  "example/CMakeFiles/echo_test.dir/DependInfo.cmake"
   )

@@ -56,6 +56,29 @@ CMAKE_BINARY_DIR = /home/sunburst7/Desktop/WebREST/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -101,29 +124,6 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/sunburst7/Desktop/WebREST/build/CMakeFiles /home/sunburst7/Desktop/WebREST/build/CMakeFiles/progress.marks
@@ -157,43 +157,146 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named lightserver-shared
+# Target rules for targets named WebREST-shared
 
 # Build rule for target.
-lightserver-shared: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 lightserver-shared
-.PHONY : lightserver-shared
+WebREST-shared: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 WebREST-shared
+.PHONY : WebREST-shared
 
 # fast build rule for target.
-lightserver-shared/fast:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/build
-.PHONY : lightserver-shared/fast
+WebREST-shared/fast:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/build
+.PHONY : WebREST-shared/fast
 
 #=============================================================================
-# Target rules for targets named lightserver-static
+# Target rules for targets named WebREST-static
 
 # Build rule for target.
-lightserver-static: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 lightserver-static
-.PHONY : lightserver-static
+WebREST-static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 WebREST-static
+.PHONY : WebREST-static
 
 # fast build rule for target.
-lightserver-static/fast:
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/build
-.PHONY : lightserver-static/fast
+WebREST-static/fast:
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/build
+.PHONY : WebREST-static/fast
 
 #=============================================================================
-# Target rules for targets named test
+# Target rules for targets named http_test
 
 # Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test
-.PHONY : test
+http_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 http_test
+.PHONY : http_test
 
 # fast build rule for target.
-test/fast:
-	$(MAKE) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/build
-.PHONY : test/fast
+http_test/fast:
+	$(MAKE) -f example/CMakeFiles/http_test.dir/build.make example/CMakeFiles/http_test.dir/build
+.PHONY : http_test/fast
+
+#=============================================================================
+# Target rules for targets named echo_test
+
+# Build rule for target.
+echo_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 echo_test
+.PHONY : echo_test
+
+# fast build rule for target.
+echo_test/fast:
+	$(MAKE) -f example/CMakeFiles/echo_test.dir/build.make example/CMakeFiles/echo_test.dir/build
+.PHONY : echo_test/fast
+
+WebREST/base/Thread.o: WebREST/base/Thread.cc.o
+
+.PHONY : WebREST/base/Thread.o
+
+# target to build an object file
+WebREST/base/Thread.cc.o:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/base/Thread.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/base/Thread.cc.o
+.PHONY : WebREST/base/Thread.cc.o
+
+WebREST/base/Thread.i: WebREST/base/Thread.cc.i
+
+.PHONY : WebREST/base/Thread.i
+
+# target to preprocess a source file
+WebREST/base/Thread.cc.i:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/base/Thread.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/base/Thread.cc.i
+.PHONY : WebREST/base/Thread.cc.i
+
+WebREST/base/Thread.s: WebREST/base/Thread.cc.s
+
+.PHONY : WebREST/base/Thread.s
+
+# target to generate assembly for a file
+WebREST/base/Thread.cc.s:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/base/Thread.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/base/Thread.cc.s
+.PHONY : WebREST/base/Thread.cc.s
+
+WebREST/base/buffer.o: WebREST/base/buffer.cc.o
+
+.PHONY : WebREST/base/buffer.o
+
+# target to build an object file
+WebREST/base/buffer.cc.o:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/base/buffer.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/base/buffer.cc.o
+.PHONY : WebREST/base/buffer.cc.o
+
+WebREST/base/buffer.i: WebREST/base/buffer.cc.i
+
+.PHONY : WebREST/base/buffer.i
+
+# target to preprocess a source file
+WebREST/base/buffer.cc.i:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/base/buffer.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/base/buffer.cc.i
+.PHONY : WebREST/base/buffer.cc.i
+
+WebREST/base/buffer.s: WebREST/base/buffer.cc.s
+
+.PHONY : WebREST/base/buffer.s
+
+# target to generate assembly for a file
+WebREST/base/buffer.cc.s:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/base/buffer.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/base/buffer.cc.s
+.PHONY : WebREST/base/buffer.cc.s
+
+WebREST/base/countdown_latch.o: WebREST/base/countdown_latch.cc.o
+
+.PHONY : WebREST/base/countdown_latch.o
+
+# target to build an object file
+WebREST/base/countdown_latch.cc.o:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/base/countdown_latch.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/base/countdown_latch.cc.o
+.PHONY : WebREST/base/countdown_latch.cc.o
+
+WebREST/base/countdown_latch.i: WebREST/base/countdown_latch.cc.i
+
+.PHONY : WebREST/base/countdown_latch.i
+
+# target to preprocess a source file
+WebREST/base/countdown_latch.cc.i:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/base/countdown_latch.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/base/countdown_latch.cc.i
+.PHONY : WebREST/base/countdown_latch.cc.i
+
+WebREST/base/countdown_latch.s: WebREST/base/countdown_latch.cc.s
+
+.PHONY : WebREST/base/countdown_latch.s
+
+# target to generate assembly for a file
+WebREST/base/countdown_latch.cc.s:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/base/countdown_latch.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/base/countdown_latch.cc.s
+.PHONY : WebREST/base/countdown_latch.cc.s
 
 WebREST/core/acceptor.o: WebREST/core/acceptor.cc.o
 
@@ -201,8 +304,8 @@ WebREST/core/acceptor.o: WebREST/core/acceptor.cc.o
 
 # target to build an object file
 WebREST/core/acceptor.cc.o:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/acceptor.cc.o
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/acceptor.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/acceptor.cc.o
 .PHONY : WebREST/core/acceptor.cc.o
 
 WebREST/core/acceptor.i: WebREST/core/acceptor.cc.i
@@ -211,8 +314,8 @@ WebREST/core/acceptor.i: WebREST/core/acceptor.cc.i
 
 # target to preprocess a source file
 WebREST/core/acceptor.cc.i:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/acceptor.cc.i
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/acceptor.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/acceptor.cc.i
 .PHONY : WebREST/core/acceptor.cc.i
 
 WebREST/core/acceptor.s: WebREST/core/acceptor.cc.s
@@ -221,8 +324,8 @@ WebREST/core/acceptor.s: WebREST/core/acceptor.cc.s
 
 # target to generate assembly for a file
 WebREST/core/acceptor.cc.s:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/acceptor.cc.s
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/acceptor.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/acceptor.cc.s
 .PHONY : WebREST/core/acceptor.cc.s
 
 WebREST/core/channel.o: WebREST/core/channel.cc.o
@@ -231,8 +334,8 @@ WebREST/core/channel.o: WebREST/core/channel.cc.o
 
 # target to build an object file
 WebREST/core/channel.cc.o:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/channel.cc.o
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/channel.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/channel.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/channel.cc.o
 .PHONY : WebREST/core/channel.cc.o
 
 WebREST/core/channel.i: WebREST/core/channel.cc.i
@@ -241,8 +344,8 @@ WebREST/core/channel.i: WebREST/core/channel.cc.i
 
 # target to preprocess a source file
 WebREST/core/channel.cc.i:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/channel.cc.i
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/channel.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/channel.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/channel.cc.i
 .PHONY : WebREST/core/channel.cc.i
 
 WebREST/core/channel.s: WebREST/core/channel.cc.s
@@ -251,8 +354,8 @@ WebREST/core/channel.s: WebREST/core/channel.cc.s
 
 # target to generate assembly for a file
 WebREST/core/channel.cc.s:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/channel.cc.s
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/channel.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/channel.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/channel.cc.s
 .PHONY : WebREST/core/channel.cc.s
 
 WebREST/core/epoller.o: WebREST/core/epoller.cc.o
@@ -261,8 +364,8 @@ WebREST/core/epoller.o: WebREST/core/epoller.cc.o
 
 # target to build an object file
 WebREST/core/epoller.cc.o:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/epoller.cc.o
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/epoller.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/epoller.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/epoller.cc.o
 .PHONY : WebREST/core/epoller.cc.o
 
 WebREST/core/epoller.i: WebREST/core/epoller.cc.i
@@ -271,8 +374,8 @@ WebREST/core/epoller.i: WebREST/core/epoller.cc.i
 
 # target to preprocess a source file
 WebREST/core/epoller.cc.i:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/epoller.cc.i
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/epoller.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/epoller.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/epoller.cc.i
 .PHONY : WebREST/core/epoller.cc.i
 
 WebREST/core/epoller.s: WebREST/core/epoller.cc.s
@@ -281,8 +384,8 @@ WebREST/core/epoller.s: WebREST/core/epoller.cc.s
 
 # target to generate assembly for a file
 WebREST/core/epoller.cc.s:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/epoller.cc.s
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/epoller.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/epoller.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/epoller.cc.s
 .PHONY : WebREST/core/epoller.cc.s
 
 WebREST/core/eventloop.o: WebREST/core/eventloop.cc.o
@@ -291,8 +394,8 @@ WebREST/core/eventloop.o: WebREST/core/eventloop.cc.o
 
 # target to build an object file
 WebREST/core/eventloop.cc.o:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/eventloop.cc.o
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/eventloop.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/eventloop.cc.o
 .PHONY : WebREST/core/eventloop.cc.o
 
 WebREST/core/eventloop.i: WebREST/core/eventloop.cc.i
@@ -301,8 +404,8 @@ WebREST/core/eventloop.i: WebREST/core/eventloop.cc.i
 
 # target to preprocess a source file
 WebREST/core/eventloop.cc.i:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/eventloop.cc.i
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/eventloop.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/eventloop.cc.i
 .PHONY : WebREST/core/eventloop.cc.i
 
 WebREST/core/eventloop.s: WebREST/core/eventloop.cc.s
@@ -311,9 +414,129 @@ WebREST/core/eventloop.s: WebREST/core/eventloop.cc.s
 
 # target to generate assembly for a file
 WebREST/core/eventloop.cc.s:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/eventloop.cc.s
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/eventloop.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/eventloop.cc.s
 .PHONY : WebREST/core/eventloop.cc.s
+
+WebREST/core/eventloop_thread.o: WebREST/core/eventloop_thread.cc.o
+
+.PHONY : WebREST/core/eventloop_thread.o
+
+# target to build an object file
+WebREST/core/eventloop_thread.cc.o:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/eventloop_thread.cc.o
+.PHONY : WebREST/core/eventloop_thread.cc.o
+
+WebREST/core/eventloop_thread.i: WebREST/core/eventloop_thread.cc.i
+
+.PHONY : WebREST/core/eventloop_thread.i
+
+# target to preprocess a source file
+WebREST/core/eventloop_thread.cc.i:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/eventloop_thread.cc.i
+.PHONY : WebREST/core/eventloop_thread.cc.i
+
+WebREST/core/eventloop_thread.s: WebREST/core/eventloop_thread.cc.s
+
+.PHONY : WebREST/core/eventloop_thread.s
+
+# target to generate assembly for a file
+WebREST/core/eventloop_thread.cc.s:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/eventloop_thread.cc.s
+.PHONY : WebREST/core/eventloop_thread.cc.s
+
+WebREST/core/eventloop_thread_pool.o: WebREST/core/eventloop_thread_pool.cc.o
+
+.PHONY : WebREST/core/eventloop_thread_pool.o
+
+# target to build an object file
+WebREST/core/eventloop_thread_pool.cc.o:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread_pool.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/eventloop_thread_pool.cc.o
+.PHONY : WebREST/core/eventloop_thread_pool.cc.o
+
+WebREST/core/eventloop_thread_pool.i: WebREST/core/eventloop_thread_pool.cc.i
+
+.PHONY : WebREST/core/eventloop_thread_pool.i
+
+# target to preprocess a source file
+WebREST/core/eventloop_thread_pool.cc.i:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread_pool.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/eventloop_thread_pool.cc.i
+.PHONY : WebREST/core/eventloop_thread_pool.cc.i
+
+WebREST/core/eventloop_thread_pool.s: WebREST/core/eventloop_thread_pool.cc.s
+
+.PHONY : WebREST/core/eventloop_thread_pool.s
+
+# target to generate assembly for a file
+WebREST/core/eventloop_thread_pool.cc.s:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread_pool.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/eventloop_thread_pool.cc.s
+.PHONY : WebREST/core/eventloop_thread_pool.cc.s
+
+WebREST/core/http_request.o: WebREST/core/http_request.cc.o
+
+.PHONY : WebREST/core/http_request.o
+
+# target to build an object file
+WebREST/core/http_request.cc.o:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/http_request.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/http_request.cc.o
+.PHONY : WebREST/core/http_request.cc.o
+
+WebREST/core/http_request.i: WebREST/core/http_request.cc.i
+
+.PHONY : WebREST/core/http_request.i
+
+# target to preprocess a source file
+WebREST/core/http_request.cc.i:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/http_request.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/http_request.cc.i
+.PHONY : WebREST/core/http_request.cc.i
+
+WebREST/core/http_request.s: WebREST/core/http_request.cc.s
+
+.PHONY : WebREST/core/http_request.s
+
+# target to generate assembly for a file
+WebREST/core/http_request.cc.s:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/http_request.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/http_request.cc.s
+.PHONY : WebREST/core/http_request.cc.s
+
+WebREST/core/http_response.o: WebREST/core/http_response.cc.o
+
+.PHONY : WebREST/core/http_response.o
+
+# target to build an object file
+WebREST/core/http_response.cc.o:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/http_response.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/http_response.cc.o
+.PHONY : WebREST/core/http_response.cc.o
+
+WebREST/core/http_response.i: WebREST/core/http_response.cc.i
+
+.PHONY : WebREST/core/http_response.i
+
+# target to preprocess a source file
+WebREST/core/http_response.cc.i:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/http_response.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/http_response.cc.i
+.PHONY : WebREST/core/http_response.cc.i
+
+WebREST/core/http_response.s: WebREST/core/http_response.cc.s
+
+.PHONY : WebREST/core/http_response.s
+
+# target to generate assembly for a file
+WebREST/core/http_response.cc.s:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/http_response.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/http_response.cc.s
+.PHONY : WebREST/core/http_response.cc.s
 
 WebREST/core/inet_address.o: WebREST/core/inet_address.cc.o
 
@@ -321,8 +544,8 @@ WebREST/core/inet_address.o: WebREST/core/inet_address.cc.o
 
 # target to build an object file
 WebREST/core/inet_address.cc.o:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/inet_address.cc.o
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/inet_address.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/inet_address.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/inet_address.cc.o
 .PHONY : WebREST/core/inet_address.cc.o
 
 WebREST/core/inet_address.i: WebREST/core/inet_address.cc.i
@@ -331,8 +554,8 @@ WebREST/core/inet_address.i: WebREST/core/inet_address.cc.i
 
 # target to preprocess a source file
 WebREST/core/inet_address.cc.i:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/inet_address.cc.i
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/inet_address.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/inet_address.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/inet_address.cc.i
 .PHONY : WebREST/core/inet_address.cc.i
 
 WebREST/core/inet_address.s: WebREST/core/inet_address.cc.s
@@ -341,8 +564,8 @@ WebREST/core/inet_address.s: WebREST/core/inet_address.cc.s
 
 # target to generate assembly for a file
 WebREST/core/inet_address.cc.s:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/inet_address.cc.s
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/inet_address.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/inet_address.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/inet_address.cc.s
 .PHONY : WebREST/core/inet_address.cc.s
 
 WebREST/core/socket.o: WebREST/core/socket.cc.o
@@ -351,8 +574,8 @@ WebREST/core/socket.o: WebREST/core/socket.cc.o
 
 # target to build an object file
 WebREST/core/socket.cc.o:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/socket.cc.o
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/socket.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/socket.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/socket.cc.o
 .PHONY : WebREST/core/socket.cc.o
 
 WebREST/core/socket.i: WebREST/core/socket.cc.i
@@ -361,8 +584,8 @@ WebREST/core/socket.i: WebREST/core/socket.cc.i
 
 # target to preprocess a source file
 WebREST/core/socket.cc.i:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/socket.cc.i
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/socket.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/socket.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/socket.cc.i
 .PHONY : WebREST/core/socket.cc.i
 
 WebREST/core/socket.s: WebREST/core/socket.cc.s
@@ -371,8 +594,8 @@ WebREST/core/socket.s: WebREST/core/socket.cc.s
 
 # target to generate assembly for a file
 WebREST/core/socket.cc.s:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/socket.cc.s
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/socket.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/socket.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/socket.cc.s
 .PHONY : WebREST/core/socket.cc.s
 
 WebREST/core/tcp_connection.o: WebREST/core/tcp_connection.cc.o
@@ -381,8 +604,8 @@ WebREST/core/tcp_connection.o: WebREST/core/tcp_connection.cc.o
 
 # target to build an object file
 WebREST/core/tcp_connection.cc.o:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/tcp_connection.cc.o
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/tcp_connection.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/tcp_connection.cc.o
 .PHONY : WebREST/core/tcp_connection.cc.o
 
 WebREST/core/tcp_connection.i: WebREST/core/tcp_connection.cc.i
@@ -391,8 +614,8 @@ WebREST/core/tcp_connection.i: WebREST/core/tcp_connection.cc.i
 
 # target to preprocess a source file
 WebREST/core/tcp_connection.cc.i:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/tcp_connection.cc.i
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/tcp_connection.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/tcp_connection.cc.i
 .PHONY : WebREST/core/tcp_connection.cc.i
 
 WebREST/core/tcp_connection.s: WebREST/core/tcp_connection.cc.s
@@ -401,8 +624,8 @@ WebREST/core/tcp_connection.s: WebREST/core/tcp_connection.cc.s
 
 # target to generate assembly for a file
 WebREST/core/tcp_connection.cc.s:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/tcp_connection.cc.s
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/tcp_connection.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/tcp_connection.cc.s
 .PHONY : WebREST/core/tcp_connection.cc.s
 
 WebREST/core/tcp_server.o: WebREST/core/tcp_server.cc.o
@@ -411,8 +634,8 @@ WebREST/core/tcp_server.o: WebREST/core/tcp_server.cc.o
 
 # target to build an object file
 WebREST/core/tcp_server.cc.o:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/tcp_server.cc.o
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/tcp_server.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/tcp_server.cc.o
 .PHONY : WebREST/core/tcp_server.cc.o
 
 WebREST/core/tcp_server.i: WebREST/core/tcp_server.cc.i
@@ -421,8 +644,8 @@ WebREST/core/tcp_server.i: WebREST/core/tcp_server.cc.i
 
 # target to preprocess a source file
 WebREST/core/tcp_server.cc.i:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/tcp_server.cc.i
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/tcp_server.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/tcp_server.cc.i
 .PHONY : WebREST/core/tcp_server.cc.i
 
 WebREST/core/tcp_server.s: WebREST/core/tcp_server.cc.s
@@ -431,8 +654,8 @@ WebREST/core/tcp_server.s: WebREST/core/tcp_server.cc.s
 
 # target to generate assembly for a file
 WebREST/core/tcp_server.cc.s:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/core/tcp_server.cc.s
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/core/tcp_server.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/core/tcp_server.cc.s
 .PHONY : WebREST/core/tcp_server.cc.s
 
 WebREST/server/echo.o: WebREST/server/echo.cc.o
@@ -441,8 +664,8 @@ WebREST/server/echo.o: WebREST/server/echo.cc.o
 
 # target to build an object file
 WebREST/server/echo.cc.o:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/server/echo.cc.o
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/server/echo.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/server/echo.cc.o
 .PHONY : WebREST/server/echo.cc.o
 
 WebREST/server/echo.i: WebREST/server/echo.cc.i
@@ -451,8 +674,8 @@ WebREST/server/echo.i: WebREST/server/echo.cc.i
 
 # target to preprocess a source file
 WebREST/server/echo.cc.i:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/server/echo.cc.i
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/server/echo.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/server/echo.cc.i
 .PHONY : WebREST/server/echo.cc.i
 
 WebREST/server/echo.s: WebREST/server/echo.cc.s
@@ -461,9 +684,39 @@ WebREST/server/echo.s: WebREST/server/echo.cc.s
 
 # target to generate assembly for a file
 WebREST/server/echo.cc.s:
-	$(MAKE) -f CMakeFiles/lightserver-shared.dir/build.make CMakeFiles/lightserver-shared.dir/WebREST/server/echo.cc.s
-	$(MAKE) -f CMakeFiles/lightserver-static.dir/build.make CMakeFiles/lightserver-static.dir/WebREST/server/echo.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/server/echo.cc.s
 .PHONY : WebREST/server/echo.cc.s
+
+WebREST/server/http.o: WebREST/server/http.cc.o
+
+.PHONY : WebREST/server/http.o
+
+# target to build an object file
+WebREST/server/http.cc.o:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.o
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/server/http.cc.o
+.PHONY : WebREST/server/http.cc.o
+
+WebREST/server/http.i: WebREST/server/http.cc.i
+
+.PHONY : WebREST/server/http.i
+
+# target to preprocess a source file
+WebREST/server/http.cc.i:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.i
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/server/http.cc.i
+.PHONY : WebREST/server/http.cc.i
+
+WebREST/server/http.s: WebREST/server/http.cc.s
+
+.PHONY : WebREST/server/http.s
+
+# target to generate assembly for a file
+WebREST/server/http.cc.s:
+	$(MAKE) -f CMakeFiles/WebREST-shared.dir/build.make CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.s
+	$(MAKE) -f CMakeFiles/WebREST-static.dir/build.make CMakeFiles/WebREST-static.dir/WebREST/server/http.cc.s
+.PHONY : WebREST/server/http.cc.s
 
 # Help Target
 help:
@@ -471,15 +724,25 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install/local"
+	@echo "... edit_cache"
 	@echo "... install/strip"
+	@echo "... WebREST-shared"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
-	@echo "... lightserver-shared"
-	@echo "... install/local"
-	@echo "... lightserver-static"
-	@echo "... test"
+	@echo "... WebREST-static"
+	@echo "... http_test"
+	@echo "... echo_test"
+	@echo "... WebREST/base/Thread.o"
+	@echo "... WebREST/base/Thread.i"
+	@echo "... WebREST/base/Thread.s"
+	@echo "... WebREST/base/buffer.o"
+	@echo "... WebREST/base/buffer.i"
+	@echo "... WebREST/base/buffer.s"
+	@echo "... WebREST/base/countdown_latch.o"
+	@echo "... WebREST/base/countdown_latch.i"
+	@echo "... WebREST/base/countdown_latch.s"
 	@echo "... WebREST/core/acceptor.o"
 	@echo "... WebREST/core/acceptor.i"
 	@echo "... WebREST/core/acceptor.s"
@@ -492,6 +755,18 @@ help:
 	@echo "... WebREST/core/eventloop.o"
 	@echo "... WebREST/core/eventloop.i"
 	@echo "... WebREST/core/eventloop.s"
+	@echo "... WebREST/core/eventloop_thread.o"
+	@echo "... WebREST/core/eventloop_thread.i"
+	@echo "... WebREST/core/eventloop_thread.s"
+	@echo "... WebREST/core/eventloop_thread_pool.o"
+	@echo "... WebREST/core/eventloop_thread_pool.i"
+	@echo "... WebREST/core/eventloop_thread_pool.s"
+	@echo "... WebREST/core/http_request.o"
+	@echo "... WebREST/core/http_request.i"
+	@echo "... WebREST/core/http_request.s"
+	@echo "... WebREST/core/http_response.o"
+	@echo "... WebREST/core/http_response.i"
+	@echo "... WebREST/core/http_response.s"
 	@echo "... WebREST/core/inet_address.o"
 	@echo "... WebREST/core/inet_address.i"
 	@echo "... WebREST/core/inet_address.s"
@@ -507,6 +782,9 @@ help:
 	@echo "... WebREST/server/echo.o"
 	@echo "... WebREST/server/echo.i"
 	@echo "... WebREST/server/echo.s"
+	@echo "... WebREST/server/http.o"
+	@echo "... WebREST/server/http.i"
+	@echo "... WebREST/server/http.s"
 .PHONY : help
 
 

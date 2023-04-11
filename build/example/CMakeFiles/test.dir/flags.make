@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=c++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/sunburst7/Desktop/WebREST/WebREST/core -I/home/sunburst7/Desktop/WebREST/WebREST/server -I/home/sunburst7/Desktop/WebREST/WebREST/util 
+CXX_INCLUDES = -I/home/sunburst7/Desktop/WebREST/WebREST/core -I/home/sunburst7/Desktop/WebREST/WebREST/server -I/home/sunburst7/Desktop/WebREST/WebREST/base 
 

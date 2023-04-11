@@ -13,7 +13,7 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 file (GLOB HEADERS 
     ${PROJECT_SOURCE_DIR}/WebREST/core/*.h
     ${PROJECT_SOURCE_DIR}/WebREST/server/*.h
-    ${PROJECT_SOURCE_DIR}/WebREST/util/*.h
+    ${PROJECT_SOURCE_DIR}/WebREST/base/*.h
 )
 install(FILES ${HEADERS} DESTINATION include/WebREST)
 
@@ -21,7 +21,7 @@ install(FILES ${HEADERS} DESTINATION include/WebREST)
 include_directories(
     ${PROJECT_SOURCE_DIR}/WebREST/core
     ${PROJECT_SOURCE_DIR}/WebREST/server
-    ${PROJECT_SOURCE_DIR}/WebREST/util
+    ${PROJECT_SOURCE_DIR}/WebREST/base
 ) 
 
 # 生成库文件
@@ -29,10 +29,11 @@ file(GLOB MY_SRC ${PROJECT_SOURCE_DIR}/WebREST/core/*.cc
                 ${PROJECT_SOURCE_DIR}/WebREST/core/*.h
                 ${PROJECT_SOURCE_DIR}/WebREST/server/*.h
                 ${PROJECT_SOURCE_DIR}/WebREST/server/*.cc
-                ${PROJECT_SOURCE_DIR}/WebREST/util/*.h
+                ${PROJECT_SOURCE_DIR}/WebREST/base/*.h
+                ${PROJECT_SOURCE_DIR}/WebREST/base/*.cc
 )
-add_library(lightserver-static STATIC ${MY_SRC})
-add_library(lightserver-shared SHARED ${MY_SRC})
+add_library(WebREST-static STATIC ${MY_SRC})
+add_library(WebREST-shared SHARED ${MY_SRC})
 
 # 添加子项目处理子项目的CMakeLists.txt
 add_subdirectory(example)

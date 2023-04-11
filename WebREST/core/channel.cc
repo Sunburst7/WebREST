@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 23:01:35
- * @LastEditTime: 2023-04-03 23:38:02
+ * @LastEditTime: 2023-04-08 23:43:10
  * @LastEditors: HH
  * @Description: 
  * @FilePath: /WebREST/WebREST/core/channel.cc
@@ -19,7 +19,8 @@ Channel::Channel(EventLoop* loop, int fd):
     loop_(loop), 
     fd_(fd),
     events_(0),
-    revents_(0)
+    revents_(0),
+    state_(kNew)
 {
 
 }

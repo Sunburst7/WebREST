@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 18:41:29
- * @LastEditTime: 2023-04-05 19:03:21
+ * @LastEditTime: 2023-04-09 20:37:11
  * @LastEditors: HH
  * @Description: 
  * @FilePath: /WebREST/WebREST/core/tcp_server.cc
@@ -25,9 +25,9 @@ void default_connection_callback(const TcpConnectionPtr& conn)
         conn->local_address().to_ip_port().c_str(),
         conn->peer_address().to_ip_port().c_str());
 }
-void default_message_callback(const TcpConnectionPtr& conn)
+void default_message_callback(const TcpConnectionPtr& conn, Buffer* buf)
 {
-    printf("%s\n", conn->get().c_str());
+    printf("%s\n", buf->retrieve_all_as_string().c_str());
 }
 
 TcpServer::TcpServer(EventLoop* loop, const InetAddress& listen_addr):

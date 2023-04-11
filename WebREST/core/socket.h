@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 00:18:16
- * @LastEditTime: 2023-04-04 04:58:33
+ * @LastEditTime: 2023-04-09 00:10:18
  * @LastEditors: HH
  * @Description: 对linux socket api的封装，生命周期是整个socket存在周期
  * @FilePath: /WebREST/WebREST/core/socket.h
@@ -39,6 +39,8 @@ public:
     void listen();
     int accpet(InetAddress&);
     static int close(int sockfd);
+    void shutdown_write();
+    
 
 private:
     const int sockfd_;
