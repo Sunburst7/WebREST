@@ -4,7 +4,6 @@
 example/CMakeFiles/http_test.dir/http_test.cc.o: ../WebREST/base/buffer.h
 example/CMakeFiles/http_test.dir/http_test.cc.o: ../WebREST/base/copyable.h
 example/CMakeFiles/http_test.dir/http_test.cc.o: ../WebREST/base/non_copyable.h
-example/CMakeFiles/http_test.dir/http_test.cc.o: ../WebREST/base/util.h
 example/CMakeFiles/http_test.dir/http_test.cc.o: ../WebREST/core/callback.h
 example/CMakeFiles/http_test.dir/http_test.cc.o: ../WebREST/core/epoller.h
 example/CMakeFiles/http_test.dir/http_test.cc.o: ../WebREST/core/eventloop.h

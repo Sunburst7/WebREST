@@ -27,9 +27,7 @@ int main()
         printf("/test handler\n");
         resp.set_status_code(HttpResponse::k200OK);
         resp.set_status_message("OK");
-        resp.set_body("test hello!");
-        resp.close_connection();
-        printf("\n");
+        resp.set_body("test hello!\n");
     });
     
     server.start();

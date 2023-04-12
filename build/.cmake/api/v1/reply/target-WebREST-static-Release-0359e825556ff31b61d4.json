@@ -1,8 +1,9 @@
 {
+	"archive" : {},
 	"artifacts" : 
 	[
 		{
-			"path" : "lib/libWebREST-shared.so"
+			"path" : "lib/libWebREST-static.a"
 		}
 	],
 	"backtrace" : 1,
@@ -25,7 +26,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 36,
+				"line" : 35,
 				"parent" : 0
 			},
 			{
@@ -42,13 +43,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-O0 -fPIC   -std=c++17"
-				}
-			],
-			"defines" : 
-			[
-				{
-					"define" : "WebREST_shared_EXPORTS"
+					"fragment" : "-O3 -DNDEBUG   -std=c++17"
 				}
 			],
 			"includes" : 
@@ -72,37 +67,26 @@
 				0,
 				2,
 				5,
-				9,
-				12,
-				14,
-				16,
-				18,
-				20,
-				22,
-				24,
-				26,
-				28,
-				30,
-				32,
-				34,
-				36
+				8,
+				11,
+				13,
+				15,
+				17,
+				19,
+				21,
+				23,
+				25,
+				27,
+				29,
+				31,
+				33,
+				35
 			]
 		}
 	],
-	"id" : "WebREST-shared::@6890427a1f51a3e7e1df",
-	"link" : 
-	{
-		"commandFragments" : 
-		[
-			{
-				"fragment" : "",
-				"role" : "flags"
-			}
-		],
-		"language" : "CXX"
-	},
-	"name" : "WebREST-shared",
-	"nameOnDisk" : "libWebREST-shared.so",
+	"id" : "WebREST-static::@6890427a1f51a3e7e1df",
+	"name" : "WebREST-static",
+	"nameOnDisk" : "libWebREST-static.a",
 	"paths" : 
 	{
 		"build" : ".",
@@ -117,7 +101,33 @@
 				0,
 				2,
 				5,
+				8,
+				11,
+				13,
+				15,
+				17,
+				19,
+				21,
+				23,
+				25,
+				27,
+				29,
+				31,
+				33,
+				35
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				1,
+				3,
+				4,
+				6,
+				7,
 				9,
+				10,
 				12,
 				14,
 				16,
@@ -131,33 +141,6 @@
 				32,
 				34,
 				36
-			]
-		},
-		{
-			"name" : "Header Files",
-			"sourceIndexes" : 
-			[
-				1,
-				3,
-				4,
-				6,
-				7,
-				8,
-				10,
-				11,
-				13,
-				15,
-				17,
-				19,
-				21,
-				23,
-				25,
-				27,
-				29,
-				31,
-				33,
-				35,
-				37
 			]
 		}
 	],
@@ -204,11 +187,6 @@
 		{
 			"backtrace" : 1,
 			"path" : "WebREST/base/non_copyable.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "WebREST/base/util.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -371,5 +349,5 @@
 			"sourceGroupIndex" : 1
 		}
 	],
-	"type" : "SHARED_LIBRARY"
+	"type" : "STATIC_LIBRARY"
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 01:52:54
- * @LastEditTime: 2023-04-09 02:27:38
+ * @LastEditTime: 2023-04-11 23:21:06
  * @LastEditors: HH
  * @Description: echo server
  * @FilePath: /WebREST/WebREST/server/echo.h
@@ -46,14 +46,14 @@ private:
     //     conn->send(msg);
     // }
 
-    void onConnection(TcpConnection* conn)
+    void onConnection(const TcpConnectionPtr& conn)
     {
         printf("EchoServer - %s -> %s\n", 
             conn->peer_address().to_ip_port().c_str(),
             conn->local_address().to_ip_port().c_str());
     }
 
-    void onMessage(TcpConnection* conn, Buffer* buf)
+    void onMessage(const TcpConnectionPtr& conn, Buffer* buf)
     {
         std::string msg(buf->retrieve_all_as_string());
         printf("echo %d bytes: %s\n", msg.size(), msg.c_str());

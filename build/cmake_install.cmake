@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    set(CMAKE_INSTALL_CONFIG_NAME "Release")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -44,7 +44,6 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/sunburst7/Desktop/WebREST/WebREST/base/copyable.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/base/countdown_latch.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/base/non_copyable.h"
-    "/home/sunburst7/Desktop/WebREST/WebREST/base/util.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/acceptor.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/callback.h"
     "/home/sunburst7/Desktop/WebREST/WebREST/core/channel.h"

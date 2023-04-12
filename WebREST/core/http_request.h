@@ -33,7 +33,7 @@ class HttpRequest: public Copyable {
 public:
     enum Method
     {
-        kInvalid, kGet, kPost, kPut, kDelete, kOptions,
+        kInvalid, kGet, kPost, kPut, kDeleted, kOptions,
     };
     enum Version
     {

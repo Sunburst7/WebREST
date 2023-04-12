@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 04:05:59
- * @LastEditTime: 2023-04-10 06:04:29
+ * @LastEditTime: 2023-04-11 23:18:44
  * @LastEditors: HH
  * @Description: tcp通信一方的功能类，通过它实现读写msg，可以是server或client, 不会给用户曝露细节
  * @FilePath: /WebREST/WebREST/core/tcp_connection.h
@@ -26,28 +26,33 @@ class Channel;
 class EventLoop;
 class Socket;
 
-class TcpConnection :  NonCopyable {
-                    //    public std::enable_shared_from_this<TcpConnection> {
+class TcpConnection : public std::enable_shared_from_this<TcpConnection> 
+{
 public:
     TcpConnection(EventLoop* loop, 
                   int sockfd,
                   const InetAddress& local_addr,
                   const InetAddress& peer_addr);
-    ~TcpConnection(){};
+    ~TcpConnection();
     
     const InetAddress& local_address() const { return local_addr_; }
     const InetAddress& peer_address() const { return peer_addr_; }
+    int fd() const;
+    EventLoop* loop() const { return loop_; }
 
-    void set_connection_callback(const ConnectionCallback& cb) { 
-        connection_callback_ = cb;
-    }
+    void set_connection_callback(const ConnectionCallback& cb) 
+    { connection_callback_ = std::move(cb); }
 
-    void set_message_callback(const MessageCallback& cb) {
-        message_callback_ = cb;
-    }
+    void set_message_callback(const MessageCallback& cb) 
+    { message_callback_ = std::move(cb); }
+
+    void set_close_callback(const CloseCallback& cb) 
+    { close_callback_ = std::move(cb); } 
 
     // called when TcpServer accepts a new connection（调用connection_callback）
     void connection_established();
+    // TcpConnection析构前最后调用的一个成员函数，它通知用户连接已断开。
+    void connection_destroyed();
 
     void shutdown();
     bool is_shutdown() const { return shutdown_; }
@@ -59,6 +64,7 @@ public:
     // 处理读
     void handle_read();
     void handle_write();
+    void handle_close();
 
     // DEBUG
     Buffer get_input_buffer() const 
@@ -67,19 +73,25 @@ public:
     { return output_buf_; }
 
 private:
+    enum ConnectionState {
+        kConnected,
+        kDisconnected
+    };
     InetAddress local_addr_;
     InetAddress peer_addr_;
+    ConnectionState state_;
     bool shutdown_;
     EventLoop* loop_;
     // 已经建立好连接的socket（无论是TcpServer被动接受还是TcpClient主动发起）
     // 作为Tcp client就是client的fd，作为server就是server的fd
-    Socket* socket_;    
-    Channel* channel_;
+    std::unique_ptr<Socket> socket_;    
+    std::unique_ptr<Channel> channel_;
     Buffer input_buf_;
     Buffer output_buf_;
 
     ConnectionCallback connection_callback_;
     MessageCallback message_callback_;
+    CloseCallback close_callback_;
 };
 typedef std::shared_ptr<TcpConnection> TcpConnectionPtr;
 } // namespace WebREST

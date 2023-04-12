@@ -39,7 +39,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "Release",
 			"projects" : 
 			[
 				{
@@ -63,28 +63,28 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "WebREST-shared::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-WebREST-shared-Debug-0e7bbf90ee7ea2466e80.json",
+					"jsonFile" : "target-WebREST-shared-Release-3a7c7a91aaa535335f90.json",
 					"name" : "WebREST-shared",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "WebREST-static::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-WebREST-static-Debug-9d2f2621ed874a90897a.json",
+					"jsonFile" : "target-WebREST-static-Release-0359e825556ff31b61d4.json",
 					"name" : "WebREST-static",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "echo_test::@70983d692f648185febe",
-					"jsonFile" : "target-echo_test-Debug-3b0ab0f616148c7e5de0.json",
+					"jsonFile" : "target-echo_test-Release-fbd5a871c4ec284935fb.json",
 					"name" : "echo_test",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "http_test::@70983d692f648185febe",
-					"jsonFile" : "target-http_test-Debug-1ad19c8be8ce88c0d715.json",
+					"jsonFile" : "target-http_test-Release-df2612f3aae5dd21c68d.json",
 					"name" : "http_test",
 					"projectIndex" : 0
 				}

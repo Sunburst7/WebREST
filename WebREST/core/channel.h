@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 23:01:28
- * @LastEditTime: 2023-04-08 23:54:18
+ * @LastEditTime: 2023-04-11 21:57:50
  * @LastEditors: HH
  * @Description: 可以理解为对某个fd的所有事件的一个管理
  *  每个Channel对象都只属于某一个IO线程。每个Channel对象自始至终只负责一个文件描述符（fd）的IO事件分发
@@ -21,24 +21,26 @@ class EventLoop;
 
 class Channel : NonCopyable{
 public:
-    enum ChannelState{
-        kNew = -1,
-        kAdd = 1,
-        kDelete = 2,
+    enum ChannelState{  // 表示在Epoller.channelmap内的状态(与内核事件表同步)
+        kNew = -1,      // 新channel， 没有添加到map
+        kAdded = 1,     // 已插入map
+        kDeleted = 2,   // 已从map删除
     };
     Channel(EventLoop* loop, int fd);
     ~Channel();
 
     void handle_event();
 
-    void set_read_callback(const EventCallback& cb) { read_cb_ = cb; }
-    void set_write_callback(const EventCallback& cb) { write_cb_ = cb; }
+    void set_read_callback(const EventCallback& cb) { read_cb_ = std::move(cb); }
+    void set_write_callback(const EventCallback& cb) { write_cb_ = std::move(cb); }
 
     void update();
+    void remove();
     
     void enable_reading() { events_ |= EPOLLIN; update(); }
     void enable_writing() { events_ |= EPOLLOUT; update(); } 
     void disable_writing() { events_ &= ~EPOLLOUT; update(); }
+    void disbale_all() { events_ = 0; update(); }
     
     bool is_reading() const { return events_ & EPOLLIN; }
     bool is_writing() const { return events_ & EPOLLOUT; }

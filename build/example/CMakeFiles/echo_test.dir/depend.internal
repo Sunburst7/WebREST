@@ -5,7 +5,6 @@ example/CMakeFiles/echo_test.dir/echo_test.cc.o
  ../WebREST/base/buffer.h
  ../WebREST/base/copyable.h
  ../WebREST/base/non_copyable.h
- ../WebREST/base/util.h
  ../WebREST/core/callback.h
  ../WebREST/core/epoller.h
  ../WebREST/core/eventloop.h

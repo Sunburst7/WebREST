@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 03:38:32
- * @LastEditTime: 2023-04-10 05:49:40
+ * @LastEditTime: 2023-04-12 00:11:13
  * @LastEditors: HH
  * @Description: 
  * @FilePath: /WebREST/WebREST/core/eventloop.cc
@@ -21,8 +21,9 @@ __thread EventLoop* t_eventloop_in_this_thread = 0; // 线程内变量 当前线
 EventLoop::EventLoop():
     thread_id_(std::this_thread::get_id()),
     epoller_(new Epoller()),
-    wakeup_fd_(::eventfd(0, EFD_NONBLOCK)),
-    wakeup_channel_(new Channel(this, wakeup_fd_))
+    wakeup_fd_(::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC)),
+    wakeup_channel_(new Channel(this, wakeup_fd_)),
+    calling_pending_func_(false)
 {
     wakeup_channel_->set_read_callback(
         std::bind(&EventLoop::handle_read, this));
@@ -31,30 +32,28 @@ EventLoop::EventLoop():
 
 EventLoop::~EventLoop()
 {
-
+    wakeup_channel_->disbale_all();
+    remove_channel(*wakeup_channel_.get());
 }
 
 void EventLoop::wakeup()
 {
   uint64_t one = 1;
   ssize_t n = ::write(wakeup_fd_, &one, sizeof one);
-  if (n != sizeof one)
-  {
-    printf("EventLoop::wakeup() write %d bytes instead of 8\n", n);
-  }
 }
 
 void EventLoop::handle_read()
 {
     uint64_t one = 1; // 64位代表8字节
     ssize_t n = ::read(wakeup_fd_, &one, sizeof(one));
-    if (n != sizeof one)
-        printf("EventLoop::handle_read() reads %d bytes instead of 8\n", n);
 }
 
 void EventLoop::do_pending_func()
 {
+    // 这样一方面减小了临界区的长度（意味着不会阻塞其他线程调用queueInLoop()），
+    // 另一方面也避免了死锁（因为Functor可能再调用queueInLoop()）
     std::vector<Func> tmp_functors;
+
     calling_pending_func_ = true;
     {
         std::lock_guard<std::mutex> lock(mutex_);
@@ -67,27 +66,25 @@ void EventLoop::do_pending_func()
 
 void EventLoop::loop()
 { 
-    printf("EventLoop:: %d start looping\n", this);
+    printf("[DEBUG] EventLoop::loop %d start looping\n", this);
     while (1) {
         epoller_->poll(active_channels_);
-        if (active_channels_.size())
-            printf("EventLoop:: active channel size: %d\n", active_channels_.size());
         for ( const auto& channel : active_channels_ ) 
         {
-            printf("EventLoop:: eventloop: channel_fd is %d\n", channel->fd());
+            printf("[DEBUG] EventLoop::loop eventloop: channel_fd is %d\n", channel->fd());
             channel->handle_event();
         }
         active_channels_.clear();
         do_pending_func();
     }
-    printf("EventLoop:: %d stop looping\n", this);
+    printf("[DEBUG] EventLoop::loop %d stop looping\n", this);
 }
 
 void EventLoop::queue_in_loop(const Func& cb)
 {
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        pending_func_.emplace_back(cb);
+        pending_func_.emplace_back(std::move(cb));
     }
     // 1 如果调用queueInLoop()的线程不是IO线程
     // 2 如果在IO线程调用queueInLoop()，而此时正在调用pending functor，
@@ -103,7 +100,7 @@ void EventLoop::run_in_loop(const Func& cb)
     if (is_in_loop_thread())
         cb();
     else
-        queue_in_loop(std::move(cb));
+        queue_in_loop(std::move(cb));  
 }
 
 #endif

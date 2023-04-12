@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 01:47:10
- * @LastEditTime: 2023-04-03 20:09:20
+ * @LastEditTime: 2023-04-11 21:58:41
  * @LastEditors: HH
  * @Description: 
  * @FilePath: /WebREST/WebREST/core/acceptor.cc
@@ -20,11 +20,18 @@ Acceptor::Acceptor(EventLoop* loop, const InetAddress& listen_addr):
     accept_sock_(Socket::CreateNonBlockingFD()),
     accept_channel_(loop, accept_sock_.fd())
 {
+    accept_sock_.set_sock_opt(SO_KEEPALIVE, 1);             // 设置listen_sock启用保活定时器，以及重用time_wait状态下socket
     accept_sock_.bind(listen_addr);
     accept_channel_.set_read_callback(
-        // 指向成员变量的函数需要加取地址符
-        std::bind(&Acceptor::handle_new_connection, this)
+        std::bind(&Acceptor::handle_new_connection, this)   // 指向成员变量的函数需要加取地址符
     );
+}
+
+Acceptor::~Acceptor()
+{
+    accept_channel_.disbale_all();
+    accept_channel_.remove();
+    accept_sock_.close();
 }
 
 void Acceptor::listen()
@@ -42,7 +49,7 @@ void Acceptor::listen()
 void Acceptor::handle_new_connection()
 {
     InetAddress peer_addr;
-    int connfd = accept_sock_.accpet(peer_addr);    // assert connfd >= 0
+    int connfd = accept_sock_.accept(peer_addr, SOCK_NONBLOCK | SOCK_CLOEXEC);    // assert connfd >= 0
     if (new_connection_cb_)
     {
         new_connection_cb_(connfd, peer_addr);

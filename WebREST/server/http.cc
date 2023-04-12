@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-08 23:24:14
- * @LastEditTime: 2023-04-10 06:19:13
+ * @LastEditTime: 2023-04-11 23:22:13
  * @LastEditors: HH
  * @Description: 
  * @FilePath: /WebREST/WebREST/server/http.cc
@@ -41,12 +41,12 @@ HttpServer::~HttpServer()
 
 }
 
-void HttpServer::onConnection(TcpConnection* conn)
+void HttpServer::onConnection(const TcpConnectionPtr& conn)
 {
-    printf("HttpServer:: new connection\n");
+    printf("[DEBUG] HttpServer::onConnection new connection come\n");
 }
 
-void HttpServer::onMessage(TcpConnection* conn, Buffer* buffer)
+void HttpServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer)
 {
     // printf("onMessage\n%s\n", buffer->get_all_as_string().c_str());
     if (conn->is_shutdown()) return;
@@ -64,7 +64,7 @@ void HttpServer::onMessage(TcpConnection* conn, Buffer* buffer)
     }
 }
 
-void HttpServer::onRequest(TcpConnection* conn, const HttpRequest& request)
+void HttpServer::onRequest(const TcpConnectionPtr& conn, const HttpRequest& request)
 {
     // printf("onRequest\n");
     std::string connection_state = std::move(request.get_header("Connection"));
@@ -74,7 +74,7 @@ void HttpServer::onRequest(TcpConnection* conn, const HttpRequest& request)
     std::string method = request.method_to_string();
     std::string path = request.path();
 
-    printf("method: %s, path: %s\n", method.c_str(), path.c_str());
+    printf("[DEBUG] HttpServer::onRequest method: %s, path: %s\n", method.c_str(), path.c_str());
 
     // 处理路由
     auto method_router_map = router_map_.find(method);
@@ -103,9 +103,10 @@ void HttpServer::onRequest(TcpConnection* conn, const HttpRequest& request)
     Buffer buffer;
     response.append_to_buffer(&buffer);
     conn->send(&buffer);
-    // if (response.close_connection()) {
-    //     conn->shutdown();
-    // } 
+    
+    if (response.close_connection()) {
+        conn->shutdown();
+    } 
 }
 
 #endif

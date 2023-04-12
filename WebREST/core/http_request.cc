@@ -26,7 +26,7 @@ bool HttpRequest::parse_method(const char* start, const char* end)
     else if (tmp == "PUT")
         method_ = kPut;
     else if (tmp == "DELETE")
-        method_ = kDelete;
+        method_ = kDeleted;
     else if (tmp == "OPTIONS")
         method_ = kOptions;
     else 
@@ -42,7 +42,7 @@ std::string HttpRequest::method_to_string() const {
         return "POST";
     else if (method_ == kPut)
         return "PUT";
-    else if (method_ == kDelete)
+    else if (method_ == kDeleted)
         return "DELETE";
     else if (method_ == kOptions)
         return "OPTIONS";

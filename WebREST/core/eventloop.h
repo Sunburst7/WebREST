@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 01:40:11
- * @LastEditTime: 2023-04-05 18:55:45
+ * @LastEditTime: 2023-04-12 00:07:40
  * @LastEditors: HH
  * @Description: 每个线程的主要事件循环，通过不断调用loop函数实现
  * @FilePath: /WebREST/WebREST/core/eventloop.h
@@ -21,7 +21,6 @@
 #include <memory>
 
 #include "epoller.h"
-#include "util.h"
 
 namespace WebREST {
 
@@ -39,6 +38,7 @@ public:
 
     void loop();
     void update_channel(Channel& channel) { epoller_->update_channel(channel); };
+    void remove_channel(Channel& channel) { epoller_->remove_channel(channel); }
 
     bool is_in_loop_thread() const 
     { return thread_id_ == std::this_thread::get_id(); }
@@ -64,7 +64,7 @@ private:
     void do_pending_func();
     
     std::thread::id thread_id_;
-    Epoller* epoller_;
+    std::unique_ptr<Epoller> epoller_;
     ChannelList active_channels_;
 
     // 用于唤醒阻塞在epoller.poll()上的IO线程

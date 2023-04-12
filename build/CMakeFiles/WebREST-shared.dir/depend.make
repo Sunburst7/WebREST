@@ -17,7 +17,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/base/countdown_latch.cc.o: ../WebREST/base
 CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.o: ../WebREST/base/buffer.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.o: ../WebREST/base/copyable.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.o: ../WebREST/base/non_copyable.h
-CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.o: ../WebREST/base/util.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.o: ../WebREST/core/acceptor.cc
 CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.o: ../WebREST/core/acceptor.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.o: ../WebREST/core/callback.h
@@ -30,7 +29,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.o: ../WebREST/core/socket
 CMakeFiles/WebREST-shared.dir/WebREST/core/channel.cc.o: ../WebREST/base/buffer.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/channel.cc.o: ../WebREST/base/copyable.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/channel.cc.o: ../WebREST/base/non_copyable.h
-CMakeFiles/WebREST-shared.dir/WebREST/core/channel.cc.o: ../WebREST/base/util.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/channel.cc.o: ../WebREST/core/callback.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/channel.cc.o: ../WebREST/core/channel.cc
 CMakeFiles/WebREST-shared.dir/WebREST/core/channel.cc.o: ../WebREST/core/channel.h
@@ -50,7 +48,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/epoller.cc.o: ../WebREST/core/inet_ad
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.o: ../WebREST/base/buffer.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.o: ../WebREST/base/copyable.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.o: ../WebREST/base/non_copyable.h
-CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.o: ../WebREST/base/util.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.o: ../WebREST/core/callback.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.o: ../WebREST/core/channel.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.o: ../WebREST/core/epoller.h
@@ -61,7 +58,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.o: ../WebREST/core/inet_
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.o: ../WebREST/base/Thread.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.o: ../WebREST/base/countdown_latch.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.o: ../WebREST/base/non_copyable.h
-CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.o: ../WebREST/base/util.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.o: ../WebREST/core/epoller.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.o: ../WebREST/core/eventloop.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.o: ../WebREST/core/eventloop_thread.cc
@@ -70,7 +66,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.o: ../WebREST/cor
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread_pool.cc.o: ../WebREST/base/Thread.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread_pool.cc.o: ../WebREST/base/countdown_latch.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread_pool.cc.o: ../WebREST/base/non_copyable.h
-CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread_pool.cc.o: ../WebREST/base/util.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread_pool.cc.o: ../WebREST/core/epoller.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread_pool.cc.o: ../WebREST/core/eventloop.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread_pool.cc.o: ../WebREST/core/eventloop_thread.h
@@ -84,7 +79,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/http_request.cc.o: ../WebREST/core/ht
 
 CMakeFiles/WebREST-shared.dir/WebREST/core/http_response.cc.o: ../WebREST/base/buffer.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/http_response.cc.o: ../WebREST/base/copyable.h
-CMakeFiles/WebREST-shared.dir/WebREST/core/http_response.cc.o: ../WebREST/base/util.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/http_response.cc.o: ../WebREST/core/http_response.cc
 CMakeFiles/WebREST-shared.dir/WebREST/core/http_response.cc.o: ../WebREST/core/http_response.h
 
@@ -101,7 +95,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/socket.cc.o: ../WebREST/core/socket.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.o: ../WebREST/base/buffer.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.o: ../WebREST/base/copyable.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.o: ../WebREST/base/non_copyable.h
-CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.o: ../WebREST/base/util.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.o: ../WebREST/core/callback.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.o: ../WebREST/core/channel.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.o: ../WebREST/core/epoller.h
@@ -114,7 +107,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.o: ../WebREST/core/
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.o: ../WebREST/base/buffer.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.o: ../WebREST/base/copyable.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.o: ../WebREST/base/non_copyable.h
-CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.o: ../WebREST/base/util.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.o: ../WebREST/core/acceptor.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.o: ../WebREST/core/callback.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.o: ../WebREST/core/channel.h
@@ -130,7 +122,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.o: ../WebREST/core/tcp_
 CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.o: ../WebREST/base/buffer.h
 CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.o: ../WebREST/base/copyable.h
 CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.o: ../WebREST/base/non_copyable.h
-CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.o: ../WebREST/base/util.h
 CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.o: ../WebREST/core/callback.h
 CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.o: ../WebREST/core/epoller.h
 CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.o: ../WebREST/core/eventloop.h
@@ -143,7 +134,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.o: ../WebREST/server/echo.h
 CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.o: ../WebREST/base/buffer.h
 CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.o: ../WebREST/base/copyable.h
 CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.o: ../WebREST/base/non_copyable.h
-CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.o: ../WebREST/base/util.h
 CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.o: ../WebREST/core/callback.h
 CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.o: ../WebREST/core/epoller.h
 CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.o: ../WebREST/core/eventloop.h

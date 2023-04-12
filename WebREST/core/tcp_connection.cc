@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 04:06:10
- * @LastEditTime: 2023-04-10 05:38:19
+ * @LastEditTime: 2023-04-11 23:20:16
  * @LastEditors: HH
  * @Description: 
  * @FilePath: /WebREST/WebREST/core/tcp_connection.cc
@@ -21,6 +21,7 @@ TcpConnection::TcpConnection(EventLoop* loop,
                              int sockfd,
                              const InetAddress& local_addr,
                              const InetAddress& peer_addr):
+    state_(kDisconnected),
     shutdown_(false),
     loop_(loop),
     socket_(new Socket(sockfd)),
@@ -36,11 +37,32 @@ TcpConnection::TcpConnection(EventLoop* loop,
     );
 }
 
+TcpConnection::~TcpConnection()
+{
+    
+}
+
+int TcpConnection::fd() const
+{
+    return socket_->fd();
+}
+
 void TcpConnection::connection_established()
 {
+    state_ = kConnected;
     channel_->enable_reading();
-    // connection_callback_(shared_from_this());
-    connection_callback_(this);
+    connection_callback_(shared_from_this());
+}
+
+void TcpConnection::connection_destroyed()
+{
+    if (state_ == kConnected)
+    {
+        state_ == kDisconnected;
+        channel_->disbale_all();
+        // connection_callback_(shared_from_this());
+    }
+    channel_->remove();
 }
 
 void TcpConnection::shutdown() {
@@ -58,9 +80,12 @@ void TcpConnection::handle_read()
     int num = input_buf_.read_fd(socket_->fd(), err_num);
     if (num > 0)
     {
-        printf("TcpConnection:: get %d bytes\n", num);
-        // message_callback_(shared_from_this());
-        message_callback_(this, &input_buf_);
+        printf("[DEBUG] TcpConnection::handle_read get %d bytes\n", num);
+        message_callback_(shared_from_this(), &input_buf_);
+    }
+    else if (num == 0)
+    {
+        handle_close();
     }
 }
 
@@ -72,20 +97,30 @@ void TcpConnection::handle_write()
         if ( n > 0 )
         {
             output_buf_.retrieve(n);
-            if (output_buf_.readable_bytes() == 0)
+            if (output_buf_.readable_bytes() == 0) // 一旦发送完毕，立刻停止观察writable事件，避免busy loop。
             {
                 channel_->disable_writing();
             }
         }
         else
         {
-            printf("TcpConnection:: handle_write");
+            printf("[DEBUG] TcpConnection::handle_write");
         }
     }
     else
     {
-        printf("TcpCOnnection:: connection fd = %d is down, no more writing", socket_->fd());
+        printf("[DEBUG] TcpConnection::handle_write connection fd = %d is down, no more writing", socket_->fd());
     }
+}
+
+void TcpConnection::handle_close()
+{
+    printf("[DEBUG] TcpConnection::handle_close close channel\n");
+    state_ = kDisconnected;
+    channel_->disbale_all();    // 删除内核注册符
+     
+    TcpConnectionPtr guard(shared_from_this());
+    close_callback_(guard);
 }
 
 void TcpConnection::send(const char* msg, int len)

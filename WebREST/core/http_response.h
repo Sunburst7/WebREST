@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-08 22:26:53
- * @LastEditTime: 2023-04-09 20:36:42
+ * @LastEditTime: 2023-04-10 23:42:41
  * @LastEditors: HH
  * @Description: HTTP response，负责将一个完整的HTTP相应写入buff
  * @FilePath: /WebREST/WebREST/core/http_response.h
@@ -10,7 +10,6 @@
 #define WebREST_HTTP_RESPONSE_H_
 
 #include "copyable.h"
-#include "util.h"
 
 #include <string>
 #include <unordered_map>

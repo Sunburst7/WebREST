@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 00:18:22
- * @LastEditTime: 2023-04-10 04:07:02
+ * @LastEditTime: 2023-04-12 01:31:55
  * @LastEditors: HH
  * @Description: 
  * @FilePath: /WebREST/WebREST/core/socket.cc
@@ -17,7 +17,7 @@ using namespace WebREST;
 
 int Socket::CreateNonBlockingFD()
 {
-    int sockfd = ::socket(PF_INET, SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC, 0);
+    int sockfd = ::socket(PF_INET, SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC, IPPROTO_TCP);
     assert( sockfd > 0 );
     return sockfd;
 }
@@ -45,14 +45,28 @@ void Socket::listen()
     assert( ret != -1 );
 }
 
-int Socket::accpet(InetAddress& client_addr)
+int Socket::accept(InetAddress& client_addr)
 {
     socklen_t len = client_addr.len();
     //TODO: blocking IO, need to modify non-blocking
-    int connfd = accept(sockfd_, client_addr.sock_addr(), &len);
+    int connfd = ::accept(sockfd_, client_addr.sock_addr(), &len);
     if ( connfd < 0 )
     {
-        printf("Socket:: errno is: %d\n", errno);
+        printf("[DEBUG] Socket::accept errno is: %d\n", errno);
+        ::exit(0);
+    }
+    // assert( connfd >= 0 );
+    return connfd;
+}
+
+int Socket::accept(InetAddress& client_addr, int flag)
+{
+    socklen_t len = client_addr.len();
+    //TODO: blocking IO, need to modify non-blocking
+    int connfd = ::accept4(sockfd_, client_addr.sock_addr(), &len, flag);
+    if ( connfd < 0 )
+    {
+        printf("[DEBUG] Socket::accept errno is: %d\n", errno);
         ::exit(0);
     }
     // assert( connfd >= 0 );
@@ -66,10 +80,23 @@ int Socket::close(int sockfd)
     return ret;
 }
 
+int Socket::close()
+{
+    int ret = ::close(sockfd_);
+    assert( ret != -1 );
+    return ret;
+}
+
 void Socket::shutdown_write()
 {
     int ret = ::shutdown(sockfd_, SHUT_WR);
-    assert( ret >= 0 );
+    // assert( ret >= 0 );
+}
+
+void Socket::set_sock_opt(int opt_name, int opt_val)
+{
+    int val = opt_val;
+    ::setsockopt(sockfd_, SOL_SOCKET, opt_name, &val, static_cast<socklen_t>(sizeof val));
 }
 
 #endif

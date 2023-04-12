@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-01 18:27:11
- * @LastEditTime: 2023-04-08 23:59:55
+ * @LastEditTime: 2023-04-12 01:33:50
  * @LastEditors: HH
  * @Description: 
  * @FilePath: /WebREST/WebREST/core/epoller.cc
@@ -17,7 +17,8 @@ using namespace WebREST;
 
 Epoller::Epoller():
     epollfd_(epoll_create(kMaxEventLen)),
-    events_(kMaxEventLen)
+    events_(kMaxEventLen),
+    channels_()
 {
 
 }
@@ -40,7 +41,7 @@ void Epoller::fill_active_channels(int events_num, ChannelList& channels)
     {
         Channel* channel_ptr = static_cast<Channel*>(events_[i].data.ptr);
         channel_ptr->set_revents(events_[i].events);                        // epoll的类poll处理
-        printf("Epoller:: new channel: %d\n", channel_ptr->fd());
+        printf("[DEBUG] Epoller::fill_active_channel new channel: %d\n", channel_ptr->fd());
         channels.emplace_back(channel_ptr);
     }
 }
@@ -67,22 +68,54 @@ void Epoller::update(int operation, Channel& channel)
 void Epoller::update_channel(Channel& channel)
 {
     int op = 0, events = channel.events();
+    int fd = channel.fd();
     Channel::ChannelState state = channel.state();
-    if ( state == Channel::ChannelState::kNew || state == Channel::ChannelState::kDelete )
-    {
-        channel.set_state(Channel::ChannelState::kAdd);
-        if (events & EPOLLIN) {
-            op = EPOLL_CTL_ADD;
-            set_non_blocking(channel.fd());
-        }
-        else if (events & EPOLLRDHUP)
-            op = EPOLL_CTL_DEL;
-        else {
 
+    if ( state == Channel::ChannelState::kNew || state == Channel::ChannelState::kDeleted )
+    {
+        if (state == Channel::ChannelState::kNew)
+        {
+            assert(channels_.find(fd) == channels_.end());
+            channels_[fd] = &channel; // 插入到Channel_Map中
+        }
+        else    // kDeleted
+        {
+            assert(channels_.find(fd) != channels_.end());
+            assert(channels_[fd] == &channel);
+        }
+        op = EPOLL_CTL_ADD;
+        channel.set_state(Channel::ChannelState::kAdded);
+    }
+    else    // kAdded
+    {
+        assert(channels_.find(fd) != channels_.end());
+        assert(channels_[fd] == &channel);
+        if (events == 0) {
+            op = EPOLL_CTL_DEL;
+            channel.set_state(Channel::ChannelState::kDeleted);
+        }
+        else 
+        {
+            op = EPOLL_CTL_MOD;
         }
     }
 
     update(op, channel);
+}
+
+void Epoller::remove_channel(Channel& channel)
+{
+    int fd = channel.fd();
+    Channel::ChannelState state = channel.state();
+    // assert(channels_.find(fd) != channels_.end());
+    // assert(channels_[fd] == &channel);
+    assert(state == Channel::ChannelState::kAdded || state == Channel::ChannelState::kDeleted);
+
+    // channel状态表示没有删除
+    if (state == Channel::ChannelState::kAdded)
+        update(EPOLL_CTL_DEL, channel);
+    channel.set_state(Channel::ChannelState::kNew);
+    channels_.erase(fd);
 }
 
 

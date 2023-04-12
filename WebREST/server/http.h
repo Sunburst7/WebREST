@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-08 23:24:08
- * @LastEditTime: 2023-04-09 20:49:55
+ * @LastEditTime: 2023-04-11 23:21:59
  * @LastEditors: HH
  * @Description: HTTP服务器，提供RESTful方法
  * @FilePath: /WebREST/WebREST/server/http.h
@@ -48,9 +48,9 @@ public:
     { router_map_["DELETE"][path] = handler; }
 
 private:
-    void onConnection(TcpConnection* conn);
-    void onMessage(TcpConnection* conn, Buffer* buf);
-    void onRequest(TcpConnection* conn, const HttpRequest& request);
+    void onConnection(const TcpConnectionPtr& conn);
+    void onMessage(const TcpConnectionPtr& conn, Buffer* buf);
+    void onRequest(const TcpConnectionPtr& conn, const HttpRequest& request);
 
     EventLoop* loop_;
     TcpServer server_;

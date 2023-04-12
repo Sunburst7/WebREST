@@ -18,7 +18,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/acceptor.cc.o
  ../WebREST/base/buffer.h
  ../WebREST/base/copyable.h
  ../WebREST/base/non_copyable.h
- ../WebREST/base/util.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/acceptor.cc
  /home/sunburst7/Desktop/WebREST/WebREST/core/acceptor.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/callback.h
@@ -31,7 +30,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/channel.cc.o
  ../WebREST/base/buffer.h
  ../WebREST/base/copyable.h
  ../WebREST/base/non_copyable.h
- ../WebREST/base/util.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/callback.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/channel.cc
  /home/sunburst7/Desktop/WebREST/WebREST/core/channel.h
@@ -51,7 +49,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop.cc.o
  ../WebREST/base/buffer.h
  ../WebREST/base/copyable.h
  ../WebREST/base/non_copyable.h
- ../WebREST/base/util.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/callback.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/channel.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/epoller.h
@@ -62,7 +59,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread.cc.o
  ../WebREST/base/Thread.h
  ../WebREST/base/countdown_latch.h
  ../WebREST/base/non_copyable.h
- ../WebREST/base/util.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/epoller.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/eventloop.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/eventloop_thread.cc
@@ -71,7 +67,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/eventloop_thread_pool.cc.o
  ../WebREST/base/Thread.h
  ../WebREST/base/countdown_latch.h
  ../WebREST/base/non_copyable.h
- ../WebREST/base/util.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/epoller.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/eventloop.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/eventloop_thread.h
@@ -85,7 +80,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/http_request.cc.o
 CMakeFiles/WebREST-shared.dir/WebREST/core/http_response.cc.o
  ../WebREST/base/buffer.h
  ../WebREST/base/copyable.h
- ../WebREST/base/util.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/http_response.cc
  /home/sunburst7/Desktop/WebREST/WebREST/core/http_response.h
 CMakeFiles/WebREST-shared.dir/WebREST/core/inet_address.cc.o
@@ -102,7 +96,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_connection.cc.o
  ../WebREST/base/buffer.h
  ../WebREST/base/copyable.h
  ../WebREST/base/non_copyable.h
- ../WebREST/base/util.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/callback.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/channel.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/epoller.h
@@ -115,7 +108,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/core/tcp_server.cc.o
  ../WebREST/base/buffer.h
  ../WebREST/base/copyable.h
  ../WebREST/base/non_copyable.h
- ../WebREST/base/util.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/acceptor.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/callback.h
  /home/sunburst7/Desktop/WebREST/WebREST/core/channel.h
@@ -131,7 +123,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.o
  ../WebREST/base/buffer.h
  ../WebREST/base/copyable.h
  ../WebREST/base/non_copyable.h
- ../WebREST/base/util.h
  ../WebREST/core/callback.h
  ../WebREST/core/epoller.h
  ../WebREST/core/eventloop.h
@@ -144,7 +135,6 @@ CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.o
  ../WebREST/base/buffer.h
  ../WebREST/base/copyable.h
  ../WebREST/base/non_copyable.h
- ../WebREST/base/util.h
  ../WebREST/core/callback.h
  ../WebREST/core/epoller.h
  ../WebREST/core/eventloop.h

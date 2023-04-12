@@ -24,8 +24,6 @@ string_view
 
 ../WebREST/base/non_copyable.h
 
-../WebREST/base/util.h
-
 ../WebREST/core/callback.h
 functional
 -
@@ -44,6 +42,8 @@ fcntl.h
 cstring
 -
 vector
+-
+unordered_map
 -
 non_copyable.h
 ../WebREST/core/non_copyable.h
@@ -69,8 +69,6 @@ memory
 -
 epoller.h
 ../WebREST/core/epoller.h
-util.h
-../WebREST/core/util.h
 
 ../WebREST/core/inet_address.h
 netinet/in.h

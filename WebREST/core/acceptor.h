@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 01:47:04
- * @LastEditTime: 2023-04-04 04:54:32
+ * @LastEditTime: 2023-04-11 21:08:25
  * @LastEditors: HH
  * @Description: 通过Socket监听并接受新连接，调用内核NewConnectionCallback
  * @FilePath: /WebREST/WebREST/core/acceptor.h
@@ -26,7 +26,7 @@ public:
     using NewConnectionCallback = std::function<void (int sockfd, const InetAddress&)>;
     
     Acceptor(EventLoop* loop, const InetAddress& listen_addr);
-    ~Acceptor(){};
+    ~Acceptor();
 
     void setNewConnectionCallback(const NewConnectionCallback& cb)
     { new_connection_cb_ = cb; }

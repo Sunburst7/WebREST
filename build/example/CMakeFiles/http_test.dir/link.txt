@@ -1,1 +1,1 @@
-/usr/bin/c++  -O0   CMakeFiles/http_test.dir/http_test.cc.o  -o ../bin/http_test  ../lib/libWebREST-static.a -lpthread 
+/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/http_test.dir/http_test.cc.o  -o ../bin/http_test  ../lib/libWebREST-static.a -lpthread 
