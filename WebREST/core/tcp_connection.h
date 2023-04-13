@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 04:05:59
- * @LastEditTime: 2023-04-11 23:18:44
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-13 00:19:44
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: tcp通信一方的功能类，通过它实现读写msg，可以是server或client, 不会给用户曝露细节
- * @FilePath: /WebREST/WebREST/core/tcp_connection.h
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/tcp_connection.h
  */
 #ifndef WebREST_TCP_CONNECTION_H_
 #define WebREST_TCP_CONNECTION_H_
@@ -40,14 +40,13 @@ public:
     int fd() const;
     EventLoop* loop() const { return loop_; }
 
-    void set_connection_callback(const ConnectionCallback& cb) 
-    { connection_callback_ = std::move(cb); }
-
-    void set_message_callback(const MessageCallback& cb) 
-    { message_callback_ = std::move(cb); }
-
-    void set_close_callback(const CloseCallback& cb) 
-    { close_callback_ = std::move(cb); } 
+    void set_connection_callback(const ConnectionCallback& cb) { connection_callback_ = std::move(cb); }
+    void set_message_callback(const MessageCallback& cb) { message_callback_ = std::move(cb); }
+    void set_close_callback(const CloseCallback& cb) { close_callback_ = std::move(cb); } 
+    // rvalue
+    void set_connection_callback(const ConnectionCallback&& cb) { connection_callback_ = cb; }
+    void set_message_callback(const MessageCallback&& cb) { message_callback_ = cb; }
+    void set_close_callback(const CloseCallback&& cb) { close_callback_ = cb; } 
 
     // called when TcpServer accepts a new connection（调用connection_callback）
     void connection_established();

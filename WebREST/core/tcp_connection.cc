@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 04:06:10
- * @LastEditTime: 2023-04-12 23:26:16
+ * @LastEditTime: 2023-04-13 01:29:19
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
  * @FilePath: /Enhance_Tiny_muduo/WebREST/core/tcp_connection.cc
@@ -29,12 +29,9 @@ TcpConnection::TcpConnection(EventLoop* loop,
     local_addr_(local_addr),
     peer_addr_(peer_addr)
 {
-    channel_->set_read_callback(
-        std::bind(&TcpConnection::handle_read, this)
-    );
-    channel_->set_write_callback(
-        std::bind(&TcpConnection::handle_write, this)
-    );
+    channel_->set_read_callback(std::bind(&TcpConnection::handle_read, this));
+    channel_->set_write_callback(std::bind(&TcpConnection::handle_write, this));
+    channel_->set_close_callback(std::bind(&TcpConnection::handle_close, this));
 }
 
 TcpConnection::~TcpConnection()
@@ -88,6 +85,8 @@ void TcpConnection::handle_read()
     {
         handle_close();
     }
+    else
+        printf("[DEBUG] TcpConnection::handle_read read system error: %d\n", err_num);
 }
 
 void TcpConnection::handle_write()
@@ -132,7 +131,10 @@ void TcpConnection::send(const char* msg, int len)
     if (!channel_->is_writing() && output_buf_.readable_bytes() == 0)
     {
         send_size = ::send(socket_->fd(), msg, len, 0);
-        remaining -= send_size;
+        if (send_size >= 0)
+            remaining -= send_size;
+        else if (errno != EWOULDBLOCK)
+            printf("[DEBUG] TcpConnection::send write system error\n");
     }
 
     assert(remaining <= len);

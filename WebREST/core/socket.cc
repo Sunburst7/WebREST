@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 00:18:22
- * @LastEditTime: 2023-04-12 01:31:55
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-12 23:59:00
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /WebREST/WebREST/core/socket.cc
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/socket.cc
  */
 
 #ifndef WebREST_SOCKET_CC_
@@ -97,6 +97,12 @@ void Socket::set_sock_opt(int opt_name, int opt_val)
 {
     int val = opt_val;
     ::setsockopt(sockfd_, SOL_SOCKET, opt_name, &val, static_cast<socklen_t>(sizeof val));
+}
+
+void Socket::set_tcp_no_delay(bool on)
+{
+    int opt_val = on ? 1 : 0;
+    ::setsockopt(sockfd_, IPPROTO_TCP, TCP_NODELAY, &opt_val, sizeof opt_val);
 }
 
 #endif

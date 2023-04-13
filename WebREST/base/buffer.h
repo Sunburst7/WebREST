@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-07 21:08:14
- * @LastEditTime: 2023-04-10 05:34:19
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-13 00:26:54
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 缓冲区
- * @FilePath: /WebREST/WebREST/base/buffer.h
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/base/buffer.h
  */
 
 #ifndef WebREST_BUFFER_H_
@@ -40,8 +40,10 @@ public:
     char* begin_write() { return begin() + write_index_; }
     const char* begin_write() const { return begin() + write_index_; } 
 
-    const std::string get_all_as_string() const
+    const std::string peek_as_string() const
     { return std::string(begin_read(), begin_write()); }
+    const std::string peek_as_string(int len) const
+    { return std::string(begin_read(), begin_read() + len); }
 
     void append(const char* message, int len)
     {

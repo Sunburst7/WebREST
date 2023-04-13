@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-07 22:40:31
- * @LastEditTime: 2023-04-10 06:19:52
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-13 00:41:27
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /WebREST/WebREST/core/http_request.cc
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/http_request.cc
  */
 
 #ifndef WebREST_HTTP_REQUEST_CC_
@@ -65,11 +65,11 @@ bool HttpRequest::set_request_line(const char* start, const char* end)
     const char* query = std::find(begin, space, '?');
     if (query != space)
     {
-        path_ = std::move(std::string(begin, query));
-        query_ = std::move(std::string(query + 1, space));
+        path_.assign(begin, query);
+        query_.assign(query + 1, space);
     }
     else
-        path_ = std::move(std::string(begin, space));
+        path_.assign(begin, space);
 
     // version
     const std::string ver_prefix = "HTTP/1.";
@@ -90,7 +90,7 @@ bool HttpRequest::set_request_line(const char* start, const char* end)
 
 bool HttpRequest::parse(Buffer* buf)
 {
-    // printf("Httprequest::parse:: buf\n%s\n", buf->get_all_as_string().c_str());
+    // printf("Httprequest::parse:: buf\n%s\n", buf->peek_as_string().c_str());
     bool ok = true;
     while (true)
     {
@@ -142,7 +142,7 @@ bool HttpRequest::parse(Buffer* buf)
         else if (state_ == kExpectBody)
         {
             if (buf->readable_bytes() > 0)
-                body_ = std::move(std::string(buf->begin_read(), buf->begin_write()));
+                body_.assign(buf->begin_read(), buf->begin_write());
             else 
                 body_ = std::string();
             state_ = kGotAll;             // 状态机出口2

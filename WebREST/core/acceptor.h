@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 01:47:04
- * @LastEditTime: 2023-04-12 23:19:05
+ * @LastEditTime: 2023-04-13 00:17:52
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 通过Socket监听并接受新连接，调用内核NewConnectionCallback
  * @FilePath: /Enhance_Tiny_muduo/WebREST/core/acceptor.h
@@ -29,14 +29,18 @@ public:
     ~Acceptor();
 
     void setNewConnectionCallback(const NewConnectionCallback& cb)
+    { new_connection_cb_ = std::move(cb); }
+    // rvalue
+    void setNewConnectionCallback(const NewConnectionCallback&& cb)
     { new_connection_cb_ = cb; }
-    
+
     void listen();
 
 private:
     // 新连接建立的回调函数，会注册在accept_channel的read_cd_中
     void handle_new_connection();
 
+    int idlefd_; // 进程文件描述符耗尽时使用的fd
     EventLoop* loop_;
     Socket accept_sock_;
     std::unique_ptr<Channel> accept_channel_;

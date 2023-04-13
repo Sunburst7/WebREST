@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 18:41:22
- * @LastEditTime: 2023-04-11 22:46:21
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-13 00:18:26
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: TCP 服务器类
- * @FilePath: /WebREST/WebREST/core/tcp_server.h
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/tcp_server.h
  */
 
 #ifndef WebREST_TCP_SERVER_H_
@@ -36,9 +36,15 @@ public:
     void set_thread_num(int num);
 
     void set_connection_callback(const ConnectionCallback& cb)
-    { connection_callback_ = cb; }
+    { connection_callback_ = std::move(cb); }
 
     void set_message_callback(const MessageCallback& cb)
+    { message_callback_ = std::move(cb); }
+    // rvalue
+    void set_connection_callback(const ConnectionCallback&& cb)
+    { connection_callback_ = cb; }
+
+    void set_message_callback(const MessageCallback&& cb)
     { message_callback_ = cb; }
 
 private:

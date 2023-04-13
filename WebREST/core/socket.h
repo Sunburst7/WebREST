@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 00:18:16
- * @LastEditTime: 2023-04-11 21:11:25
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-13 00:00:05
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 对linux socket api的封装，生命周期是整个socket存在周期
- * @FilePath: /WebREST/WebREST/core/socket.h
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/socket.h
  */
 
 #ifndef WebREST_SOCKET_H_
@@ -15,6 +15,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <netinet/tcp.h>
 
 #include "non_copyable.h"
 
@@ -44,6 +45,7 @@ public:
     void shutdown_write();
     
     void set_sock_opt(int opt_name, int opt_val);
+    void set_tcp_no_delay(bool on);
 private:
     const int sockfd_;
 };

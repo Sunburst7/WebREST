@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-08 23:24:14
- * @LastEditTime: 2023-04-12 22:13:16
+ * @LastEditTime: 2023-04-13 01:52:16
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
  * @FilePath: /Enhance_Tiny_muduo/WebREST/server/http.cc
@@ -48,7 +48,7 @@ void HttpServer::onConnection(const TcpConnectionPtr& conn)
 
 void HttpServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer)
 {
-    // printf("onMessage\n%s\n", buffer->get_all_as_string().c_str());
+    // printf("onMessage\n%s\n", buffer->peek_as_string().c_str());
     if (conn->is_shutdown()) return;
     HttpRequest req;
     if (!req.parse(buffer))
@@ -61,6 +61,7 @@ void HttpServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer)
     if (req.got_all())
     {
         onRequest(conn, req);
+        req.reset();            // 处理长连接
     }
 }
 

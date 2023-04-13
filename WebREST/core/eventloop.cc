@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 03:38:32
- * @LastEditTime: 2023-04-12 22:39:17
+ * @LastEditTime: 2023-04-13 02:44:32
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
  * @FilePath: /Enhance_Tiny_muduo/WebREST/core/eventloop.cc
@@ -14,9 +14,23 @@
 #include "channel.h"
 #include "epoller.h"
 
+
 using namespace WebREST;
 
 __thread EventLoop* t_eventloop_in_this_thread = 0; // 线程内变量 当前线程的eventloop addr
+
+namespace {
+
+class IgnoreSigPipe {
+ public:
+  IgnoreSigPipe() {
+    ::signal(SIGPIPE, SIG_IGN);
+  }
+};
+
+IgnoreSigPipe initObj;
+
+}  // namespace
 
 EventLoop::EventLoop():
     thread_id_(std::this_thread::get_id()),

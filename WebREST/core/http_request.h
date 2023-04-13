@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-07 22:40:22
- * @LastEditTime: 2023-04-09 01:59:33
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-13 00:32:43
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 表示一个HTTP请求
- * @FilePath: /WebREST/WebREST/core/http_request.h
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/http_request.h
  */
 
 // GET / HTTP/1.1               --request line(method path+query version)
@@ -51,12 +51,22 @@ public:
         state_(kExpectRequestLine), 
         method_(kInvalid), 
         version_(kUnknown) {};
-    
+    // reset(长连接处理)
+    void reset()
+    {
+        state_ = kExpectRequestLine;
+        method_ = kInvalid;
+        version_ = kUnknown;
+        path_ = "", query_ = "", body_ = "";
+        headers_.clear();
+    }   
+
     // 解析请求
     bool parse(Buffer* buf);
     bool got_all() const
     { return state_ == kGotAll; }
   
+    // getter
     Method method() const { return method_; }
     std::string method_to_string() const;
     std::string path() const { return path_; }

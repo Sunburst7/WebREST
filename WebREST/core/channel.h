@@ -1,11 +1,11 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 23:01:28
- * @LastEditTime: 2023-04-11 21:57:50
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-13 01:27:30
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 可以理解为对某个fd的所有事件的一个管理
  *  每个Channel对象都只属于某一个IO线程。每个Channel对象自始至终只负责一个文件描述符（fd）的IO事件分发
- * @FilePath: /WebREST/WebREST/core/channel.h
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/channel.h
  */
 #ifndef WebREST_CHANNEL_H_
 #define WebREST_CHANNEL_H_
@@ -33,6 +33,11 @@ public:
 
     void set_read_callback(const EventCallback& cb) { read_cb_ = std::move(cb); }
     void set_write_callback(const EventCallback& cb) { write_cb_ = std::move(cb); }
+    void set_close_callback(const EventCallback& cb) { close_cb_ = std::move(cb); }
+    // rvalue
+    void set_read_callback(const EventCallback&& cb) { read_cb_ = cb; }
+    void set_write_callback(const EventCallback&& cb) { write_cb_ = cb; }
+    void set_close_callback(const EventCallback&& cb) { close_cb_ = cb; }
 
     void update();
     void remove();
@@ -63,6 +68,7 @@ private:
     ChannelState state_;
     EventCallback read_cb_;
     EventCallback write_cb_;
+    EventCallback close_cb_;
 };
 
 } // namespace WebREST

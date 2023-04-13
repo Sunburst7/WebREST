@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 01:40:11
- * @LastEditTime: 2023-04-12 00:07:40
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-13 00:15:28
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 每个线程的主要事件循环，通过不断调用loop函数实现
- * @FilePath: /WebREST/WebREST/core/eventloop.h
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/eventloop.h
  */
 
 #ifndef WebREST_EVENTLOOP_H_
@@ -19,6 +19,7 @@
 #include <mutex>
 #include <vector>
 #include <memory>
+#include <signal.h>
 
 #include "epoller.h"
 
