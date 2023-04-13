@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 01:47:10
- * @LastEditTime: 2023-04-11 21:58:41
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-12 23:18:54
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /WebREST/WebREST/core/acceptor.cc
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/acceptor.cc
  */
 
 #ifndef WebREST_ACCEPT_CC_
@@ -18,26 +18,26 @@ using namespace WebREST;
 Acceptor::Acceptor(EventLoop* loop, const InetAddress& listen_addr):
     loop_(loop),
     accept_sock_(Socket::CreateNonBlockingFD()),
-    accept_channel_(loop, accept_sock_.fd())
+    accept_channel_(new Channel(loop, accept_sock_.fd()))
 {
     accept_sock_.set_sock_opt(SO_KEEPALIVE, 1);             // 设置listen_sock启用保活定时器，以及重用time_wait状态下socket
     accept_sock_.bind(listen_addr);
-    accept_channel_.set_read_callback(
+    accept_channel_->set_read_callback(
         std::bind(&Acceptor::handle_new_connection, this)   // 指向成员变量的函数需要加取地址符
     );
 }
 
 Acceptor::~Acceptor()
 {
-    accept_channel_.disbale_all();
-    accept_channel_.remove();
+    accept_channel_->disbale_all();
+    accept_channel_->remove();
     accept_sock_.close();
 }
 
 void Acceptor::listen()
 {
     accept_sock_.listen();
-    accept_channel_.enable_reading();
+    accept_channel_->enable_reading();
 }
 
 // Acceptor::handleRead()的策略很简单，每次accept(2)一个socket。另

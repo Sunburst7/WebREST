@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 04:06:10
- * @LastEditTime: 2023-04-11 23:20:16
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-12 23:26:16
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /WebREST/WebREST/core/tcp_connection.cc
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/tcp_connection.cc
  */
 
 #ifndef WebREST_TCP_CONNECTION_CC_
@@ -39,7 +39,7 @@ TcpConnection::TcpConnection(EventLoop* loop,
 
 TcpConnection::~TcpConnection()
 {
-    
+    // 在Socket的析构函数中释放socket fd
 }
 
 int TcpConnection::fd() const
@@ -66,6 +66,7 @@ void TcpConnection::connection_destroyed()
 }
 
 void TcpConnection::shutdown() {
+    printf("[DEBUG] %d connection shutdown\n", this->fd());
     if (!channel_->is_writing())
     {
         shutdown_ = true;
@@ -115,7 +116,7 @@ void TcpConnection::handle_write()
 
 void TcpConnection::handle_close()
 {
-    printf("[DEBUG] TcpConnection::handle_close close channel\n");
+    printf("[DEBUG] TcpConnection::handle_close %d close channel\n", this->fd());
     state_ = kDisconnected;
     channel_->disbale_all();    // 删除内核注册符
      

@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 18:41:29
- * @LastEditTime: 2023-04-11 23:15:12
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-12 23:00:14
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /WebREST/WebREST/core/tcp_server.cc
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/tcp_server.cc
  */
 
 #ifndef WebREST_TCP_SERVER_CC_
@@ -63,9 +63,8 @@ void TcpServer::set_thread_num(int num)
 
 void TcpServer::new_connection(int connfd, const InetAddress& peer_addr)
 {
-    printf("TcpServer:: new connection coming, socket_fd:%d address: %s\n", connfd, peer_addr.to_ip_port().c_str());
+    printf("[DEBUG] TcpServer::new_connection new connection coming, socket_fd:%d address: %s\n", connfd, peer_addr.to_ip_port().c_str());
     EventLoop* io_loop = thread_pool_->get_next_loop();
-    printf("[DEBUG] TcpServer::new_connection thread_id: %d\n", io_loop->thread_id());
     TcpConnectionPtr conn = std::make_shared<TcpConnection>(        
         loop_, 
         connfd,
@@ -73,6 +72,7 @@ void TcpServer::new_connection(int connfd, const InetAddress& peer_addr)
         peer_addr
     );
     connections_[connfd] = conn;
+    printf("[DEBUG] TcpServer::new_connection current connection num: %d\n", connections_.size());
     conn->set_connection_callback(connection_callback_);
     conn->set_message_callback(message_callback_);
     conn->set_close_callback(std::bind(&TcpServer::remove_connection, this, _1));
@@ -82,7 +82,6 @@ void TcpServer::new_connection(int connfd, const InetAddress& peer_addr)
 void TcpServer::remove_connection_in_loop(const TcpConnectionPtr& ptr)
 {
     assert(connections_.find(ptr->fd()) != connections_.end());
-
     connections_.erase(connections_.find(ptr->fd()));
     EventLoop* io_loop = ptr->loop();
     io_loop->run_in_loop(std::bind(&TcpConnection::connection_destroyed, ptr)); // 在IO loop中执行destroy

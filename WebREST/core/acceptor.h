@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 01:47:04
- * @LastEditTime: 2023-04-11 21:08:25
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-12 23:19:05
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 通过Socket监听并接受新连接，调用内核NewConnectionCallback
- * @FilePath: /WebREST/WebREST/core/acceptor.h
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/acceptor.h
  */
 
 #ifndef WebREST_ACCPETOR_H_
@@ -39,7 +39,7 @@ private:
 
     EventLoop* loop_;
     Socket accept_sock_;
-    Channel accept_channel_;
+    std::unique_ptr<Channel> accept_channel_;
     NewConnectionCallback new_connection_cb_;
 };
 } // namespace WebREST

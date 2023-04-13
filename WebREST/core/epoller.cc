@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-01 18:27:11
- * @LastEditTime: 2023-04-12 01:33:50
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-12 23:03:56
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /WebREST/WebREST/core/epoller.cc
+ * @FilePath: /Enhance_Tiny_muduo/WebREST/core/epoller.cc
  */
 
 #ifndef WebREST_EPOLLER_CC_
@@ -12,11 +12,12 @@
 
 #include "epoller.h"
 #include "channel.h"
+#include "socket.h"
 
 using namespace WebREST;
 
 Epoller::Epoller():
-    epollfd_(epoll_create(kMaxEventLen)),
+    epollfd_(::epoll_create1(EPOLL_CLOEXEC)),
     events_(kMaxEventLen),
     channels_()
 {
@@ -25,7 +26,7 @@ Epoller::Epoller():
 
 Epoller::~Epoller()
 {
-    
+    Socket::close(epollfd_);
 }
 
 int Epoller::set_non_blocking(int fd) {
@@ -44,12 +45,18 @@ void Epoller::fill_active_channels(int events_num, ChannelList& channels)
         printf("[DEBUG] Epoller::fill_active_channel new channel: %d\n", channel_ptr->fd());
         channels.emplace_back(channel_ptr);
     }
+    // if (events_num == static_cast<int>(events_.size()))
+    // {
+    //     printf("[DEBUG] Epoller::fill_active_channels resize events\n");
+    //     events_.resize(events_num * 2);  
+    // }
+
 }
 
 void Epoller::poll(ChannelList& active_channels)
 {
     // printf("epoll start\n");
-    int num = epoll_wait(epollfd_, &*events_.begin(), kMaxEventLen, 0);
+    int num = epoll_wait(epollfd_, &*events_.begin(), kMaxEventLen, -1);
     fill_active_channels(num, active_channels);
     // printf("epoll: active_channel count: %d\n", active_channels.size());
     // printf("epoll end\n");
@@ -59,7 +66,7 @@ void Epoller::update(int operation, Channel& channel)
 {
     struct epoll_event event;
     memset(&event, 0, sizeof event);
-    event.events = channel.events() | EPOLLET;
+    event.events = channel.events();    // LT 模式
     event.data.ptr = static_cast<void*>(&channel);
 
     epoll_ctl(epollfd_, operation, channel.fd(), &event);
