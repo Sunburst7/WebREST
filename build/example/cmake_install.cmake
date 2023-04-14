@@ -1,4 +1,4 @@
-# Install script for directory: /home/sunburst7/桌面/Enhance_Tiny_muduo/example
+# Install script for directory: /home/sunburst7/桌面/WebREST/example
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

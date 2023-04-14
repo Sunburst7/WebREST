@@ -1,8 +1,8 @@
 CMakeFiles/WebREST-shared.dir/WebREST/base/buffer.cc.o: \
- /home/sunburst7/桌面/Enhance_Tiny_muduo/WebREST/base/buffer.cc \
+ /home/sunburst7/桌面/WebREST/WebREST/base/buffer.cc \
  /usr/include/stdc-predef.h \
- /home/sunburst7/桌面/Enhance_Tiny_muduo/WebREST/base/buffer.h \
- /home/sunburst7/桌面/Enhance_Tiny_muduo/WebREST/base/copyable.h \
+ /home/sunburst7/桌面/WebREST/WebREST/base/buffer.h \
+ /home/sunburst7/桌面/WebREST/WebREST/base/copyable.h \
  /usr/include/assert.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \

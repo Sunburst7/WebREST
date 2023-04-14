@@ -1,8 +1,8 @@
 /*
  * @Author: HH
  * @Date: 2023-04-08 23:24:08
- * @LastEditTime: 2023-04-11 23:21:59
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-14 02:28:50
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: HTTP服务器，提供RESTful方法
  * @FilePath: /WebREST/WebREST/server/http.h
  */
@@ -24,7 +24,7 @@ namespace WebREST {
 class HttpServer {
 public:
     using RouterHandler = std::function<void(const HttpRequest& req, HttpResponse& resp)>;
-    HttpServer(EventLoop* loop, const InetAddress& address);
+    HttpServer(EventLoop* loop, const InetAddress& address, bool auto_close_idle_connection);
     ~HttpServer();
 
     void start() { server_.start(); }
@@ -48,13 +48,16 @@ public:
     { router_map_["DELETE"][path] = handler; }
 
 private:
+    static const int kConnectionTimeout = 8;
     void onConnection(const TcpConnectionPtr& conn);
     void onMessage(const TcpConnectionPtr& conn, Buffer* buf);
     void onRequest(const TcpConnectionPtr& conn, const HttpRequest& request);
+    void onIdle(std::weak_ptr<TcpConnection>& connection);
 
     EventLoop* loop_;
     TcpServer server_;
     std::unordered_map<std::string, std::unordered_map<std::string, RouterHandler>> router_map_;
+    bool auto_close_idle_connection_;
     // std::unordered_map<std::string, RouterHandler> get_router_map_;
     // std::unordered_map<std::string, RouterHandler> post_router_map_;
     // std::unordered_map<std::string, RouterHandler> put_router_map_;

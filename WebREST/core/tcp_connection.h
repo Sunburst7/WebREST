@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 04:05:59
- * @LastEditTime: 2023-04-13 00:19:44
+ * @LastEditTime: 2023-04-14 02:19:59
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: tcp通信一方的功能类，通过它实现读写msg，可以是server或client, 不会给用户曝露细节
- * @FilePath: /Enhance_Tiny_muduo/WebREST/core/tcp_connection.h
+ * @FilePath: /WebREST/WebREST/core/tcp_connection.h
  */
 #ifndef WebREST_TCP_CONNECTION_H_
 #define WebREST_TCP_CONNECTION_H_
@@ -18,6 +18,7 @@
 #include "non_copyable.h"
 #include "inet_address.h"
 #include "buffer.h"
+#include "timestamp.h"
 
 
 namespace WebREST {
@@ -35,11 +36,14 @@ public:
                   const InetAddress& peer_addr);
     ~TcpConnection();
     
+    // getter
     const InetAddress& local_address() const { return local_addr_; }
     const InetAddress& peer_address() const { return peer_addr_; }
     int fd() const;
     EventLoop* loop() const { return loop_; }
-
+    TimeStamp last_message() const { return last_message_; }
+    // setter
+    void set_last_message(TimeStamp now) { last_message_ = now; }
     void set_connection_callback(const ConnectionCallback& cb) { connection_callback_ = std::move(cb); }
     void set_message_callback(const MessageCallback& cb) { message_callback_ = std::move(cb); }
     void set_close_callback(const CloseCallback& cb) { close_callback_ = std::move(cb); } 
@@ -79,6 +83,7 @@ private:
     InetAddress local_addr_;
     InetAddress peer_addr_;
     ConnectionState state_;
+    TimeStamp last_message_;
     bool shutdown_;
     EventLoop* loop_;
     // 已经建立好连接的socket（无论是TcpServer被动接受还是TcpClient主动发起）

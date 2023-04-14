@@ -55,6 +55,13 @@
         "condition_variable": "cpp",
         "mutex": "cpp",
         "buffer": "cpp",
-        "netfwd": "cpp"
+        "netfwd": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "executor": "cpp",
+        "io_context": "cpp",
+        "timer": "cpp",
+        "future": "cpp",
+        "set": "cpp"
     }
 }

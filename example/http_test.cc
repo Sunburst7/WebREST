@@ -1,8 +1,8 @@
 /*
  * @Author: HH
  * @Date: 2023-04-09 20:43:29
- * @LastEditTime: 2023-04-10 05:50:27
- * @LastEditors: HH
+ * @LastEditTime: 2023-04-14 03:16:11
+ * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
  * @FilePath: /WebREST/example/http_test.cc
  */
@@ -21,7 +21,7 @@ int main()
 {
     EventLoop loop;
     InetAddress listen_addr(54321);
-    HttpServer server(&loop, listen_addr);
+    HttpServer server(&loop, listen_addr, true);
 
     server.Get("/test", [](const HttpRequest& req, HttpResponse& resp){
         printf("/test handler\n");

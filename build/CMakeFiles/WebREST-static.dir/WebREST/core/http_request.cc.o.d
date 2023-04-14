@@ -1,7 +1,7 @@
 CMakeFiles/WebREST-static.dir/WebREST/core/http_request.cc.o: \
- /home/sunburst7/桌面/Enhance_Tiny_muduo/WebREST/core/http_request.cc \
+ /home/sunburst7/桌面/WebREST/WebREST/core/http_request.cc \
  /usr/include/stdc-predef.h \
- /home/sunburst7/桌面/Enhance_Tiny_muduo/WebREST/core/http_request.h \
+ /home/sunburst7/桌面/WebREST/WebREST/core/http_request.h \
  /usr/include/c++/9/iostream \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
@@ -167,7 +167,7 @@ CMakeFiles/WebREST-static.dir/WebREST/core/http_request.cc.o: \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
  /usr/include/c++/9/pstl/execution_defs.h \
- /home/sunburst7/桌面/Enhance_Tiny_muduo/WebREST/base/copyable.h \
- /home/sunburst7/桌面/Enhance_Tiny_muduo/WebREST/base/buffer.h \
- /home/sunburst7/桌面/Enhance_Tiny_muduo/WebREST/base/copyable.h \
+ /home/sunburst7/桌面/WebREST/WebREST/base/copyable.h \
+ /home/sunburst7/桌面/WebREST/WebREST/base/buffer.h \
+ /home/sunburst7/桌面/WebREST/WebREST/base/copyable.h \
  /usr/include/assert.h

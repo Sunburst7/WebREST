@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DWebREST_shared_EXPORTS
 
-CXX_INCLUDES = -I/home/sunburst7/桌面/Enhance_Tiny_muduo/WebREST/core -I/home/sunburst7/桌面/Enhance_Tiny_muduo/WebREST/server -I/home/sunburst7/桌面/Enhance_Tiny_muduo/WebREST/base
+CXX_INCLUDES = -I/home/sunburst7/桌面/WebREST/WebREST/core -I/home/sunburst7/桌面/WebREST/WebREST/server -I/home/sunburst7/桌面/WebREST/WebREST/base
 
 CXX_FLAGS = -O3 -DNDEBUG -fPIC   -std=c++17
 

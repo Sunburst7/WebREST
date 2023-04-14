@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 01:40:11
- * @LastEditTime: 2023-04-13 00:15:28
+ * @LastEditTime: 2023-04-14 02:06:36
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 每个线程的主要事件循环，通过不断调用loop函数实现
- * @FilePath: /Enhance_Tiny_muduo/WebREST/core/eventloop.h
+ * @FilePath: /WebREST/WebREST/core/eventloop.h
  */
 
 #ifndef WebREST_EVENTLOOP_H_
@@ -22,6 +22,9 @@
 #include <signal.h>
 
 #include "epoller.h"
+#include "timestamp.h"
+#include "timer_queue.h"
+#include "callback.h"
 
 namespace WebREST {
 
@@ -34,9 +37,17 @@ public:
 
     EventLoop();
     ~EventLoop();
+
+    void run_at(TimeStamp timestamp, TimerCallback&& cb)
+    { timer_queue_->add_timer(timestamp, cb, 0.0); }
+
+    void run_after(double wait_time, TimerCallback&& cb)
+    { timer_queue_->add_timer(TimeStamp::add_time(TimeStamp::now(), wait_time), cb, 0.0); }
+
+    void run_every(double interval, TimerCallback&& cb) 
+    { timer_queue_->add_timer(TimeStamp::add_time(TimeStamp::now(), interval), cb, interval); }
     
     // static EventLoop* get_eventloop_of_current_thread();
-
     void loop();
     void update_channel(Channel& channel) { epoller_->update_channel(channel); };
     void remove_channel(Channel& channel) { epoller_->remove_channel(channel); }
@@ -66,6 +77,7 @@ private:
     
     std::thread::id thread_id_;
     std::unique_ptr<Epoller> epoller_;
+    std::unique_ptr<TimerQueue> timer_queue_;
     ChannelList active_channels_;
 
     // 用于唤醒阻塞在epoller.poll()上的IO线程

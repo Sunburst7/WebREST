@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-08 23:24:14
- * @LastEditTime: 2023-04-13 01:52:16
+ * @LastEditTime: 2023-04-14 03:15:25
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /Enhance_Tiny_muduo/WebREST/server/http.cc
+ * @FilePath: /WebREST/WebREST/server/http.cc
  */
 #ifndef WebREST_HTTP_CC_
 #define WebREST_HTTP_CC_
@@ -20,8 +20,8 @@ void defaultHttpCallback(const HttpRequest&, HttpResponse* resp)
   resp->set_close_connection(true);
 }
 
-HttpServer::HttpServer(EventLoop* loop, const InetAddress& address):
-    loop_(loop), server_(loop, address)
+HttpServer::HttpServer(EventLoop* loop, const InetAddress& address, bool auto_close_idle_connection):
+    loop_(loop), server_(loop, address), auto_close_idle_connection_(auto_close_idle_connection)
 {
     server_.set_connection_callback(
         std::bind(&HttpServer::onConnection, this, _1)
@@ -41,14 +41,34 @@ HttpServer::~HttpServer()
 
 }
 
+void HttpServer::onIdle(std::weak_ptr<TcpConnection>& connection) {
+    TcpConnectionPtr conn(connection.lock());
+    if (conn) 
+    {
+        if (TimeStamp::add_time(conn->last_message(), kConnectionTimeout) < TimeStamp::now()) 
+        {
+            printf("[DEBUG] %s HttpServer::HandleIdleConnection\n", TimeStamp::now().to_format_string().data()); 
+            conn->shutdown();
+        } 
+        else 
+            loop_->run_after(kConnectionTimeout, std::move(std::bind(&HttpServer::onIdle, this, connection))); 
+    }
+}
+
 void HttpServer::onConnection(const TcpConnectionPtr& conn)
 {
     printf("[DEBUG] HttpServer::onConnection new connection come\n");
+    // 创建一个每隔kCOnnectionTimeout就检查是否需要关闭连接的定时函数
+    if (auto_close_idle_connection_)
+    {
+        loop_->run_after(kConnectionTimeout, std::move(std::bind(&HttpServer::onIdle, this, std::weak_ptr<TcpConnection>(conn)))); 
+    }
 }
 
 void HttpServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer)
 {
     // printf("onMessage\n%s\n", buffer->peek_as_string().c_str());
+    conn->set_last_message(TimeStamp::now());   // 更新最后一次消息传送的时间
     if (conn->is_shutdown()) return;
     HttpRequest req;
     if (!req.parse(buffer))

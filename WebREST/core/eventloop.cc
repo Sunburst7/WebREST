@@ -35,6 +35,7 @@ IgnoreSigPipe initObj;
 EventLoop::EventLoop():
     thread_id_(std::this_thread::get_id()),
     epoller_(new Epoller()),
+    timer_queue_(new TimerQueue(this)),
     wakeup_fd_(::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC)),
     wakeup_channel_(new Channel(this, wakeup_fd_)),
     calling_pending_func_(false)
