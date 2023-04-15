@@ -1,8 +1,0 @@
-/home/sunburst7/桌面/WebREST/build/CMakeFiles/WebREST-static.dir
-/home/sunburst7/桌面/WebREST/build/CMakeFiles/WebREST-shared.dir
-/home/sunburst7/桌面/WebREST/build/CMakeFiles/edit_cache.dir
-/home/sunburst7/桌面/WebREST/build/CMakeFiles/rebuild_cache.dir
-/home/sunburst7/桌面/WebREST/build/example/CMakeFiles/echo_test.dir
-/home/sunburst7/桌面/WebREST/build/example/CMakeFiles/http_test.dir
-/home/sunburst7/桌面/WebREST/build/example/CMakeFiles/edit_cache.dir
-/home/sunburst7/桌面/WebREST/build/example/CMakeFiles/rebuild_cache.dir
