@@ -92,7 +92,7 @@ http_test_EXTERNAL_OBJECTS =
 
 bin/http_test: example/CMakeFiles/http_test.dir/http_test.cc.o
 bin/http_test: example/CMakeFiles/http_test.dir/build.make
-bin/http_test: lib/libWebREST-static.a
+bin/http_test: WebREST/lib/libWebREST-static.a
 bin/http_test: example/CMakeFiles/http_test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sunburst7/桌面/WebREST/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/http_test"
 	cd /home/sunburst7/桌面/WebREST/build/example && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/http_test.dir/link.txt --verbose=$(VERBOSE)

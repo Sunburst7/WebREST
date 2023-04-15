@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 18:41:29
- * @LastEditTime: 2023-04-12 23:00:14
+ * @LastEditTime: 2023-04-14 21:55:48
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /Enhance_Tiny_muduo/WebREST/core/tcp_server.cc
+ * @FilePath: /WebREST/WebREST/core/tcp_server.cc
  */
 
 #ifndef WebREST_TCP_SERVER_CC_
@@ -63,7 +63,7 @@ void TcpServer::set_thread_num(int num)
 
 void TcpServer::new_connection(int connfd, const InetAddress& peer_addr)
 {
-    printf("[DEBUG] TcpServer::new_connection new connection coming, socket_fd:%d address: %s\n", connfd, peer_addr.to_ip_port().c_str());
+    printf("[DEBUG] new connection coming, socket_fd: %d address: %s\n", connfd, peer_addr.to_ip_port().c_str());
     EventLoop* io_loop = thread_pool_->get_next_loop();
     TcpConnectionPtr conn = std::make_shared<TcpConnection>(        
         loop_, 
@@ -72,7 +72,7 @@ void TcpServer::new_connection(int connfd, const InetAddress& peer_addr)
         peer_addr
     );
     connections_[connfd] = conn;
-    printf("[DEBUG] TcpServer::new_connection current connection num: %d\n", connections_.size());
+    printf("[DEBUG] current connection number: %d\n", static_cast<int>(connections_.size()));
     conn->set_connection_callback(connection_callback_);
     conn->set_message_callback(message_callback_);
     conn->set_close_callback(std::bind(&TcpServer::remove_connection, this, _1));

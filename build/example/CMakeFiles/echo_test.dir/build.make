@@ -92,7 +92,7 @@ echo_test_EXTERNAL_OBJECTS =
 
 bin/echo_test: example/CMakeFiles/echo_test.dir/echo_test.cc.o
 bin/echo_test: example/CMakeFiles/echo_test.dir/build.make
-bin/echo_test: lib/libWebREST-static.a
+bin/echo_test: WebREST/lib/libWebREST-static.a
 bin/echo_test: example/CMakeFiles/echo_test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sunburst7/桌面/WebREST/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/echo_test"
 	cd /home/sunburst7/桌面/WebREST/build/example && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/echo_test.dir/link.txt --verbose=$(VERBOSE)

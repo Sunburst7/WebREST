@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 03:38:32
- * @LastEditTime: 2023-04-13 02:44:32
+ * @LastEditTime: 2023-04-14 21:51:40
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /Enhance_Tiny_muduo/WebREST/core/eventloop.cc
+ * @FilePath: /WebREST/WebREST/core/eventloop.cc
  */
 
 #ifndef WebREST_EVENTLOOP_CC_
@@ -81,18 +81,24 @@ void EventLoop::do_pending_func()
 
 void EventLoop::loop()
 { 
-    printf("[DEBUG] EventLoop::loop %d start looping\n", this);
+#ifdef DEBUG_OUTPUT
+    printf("[DEBUG] EventLoop::loop %d start looping\n", static_cast<int>(this));
+#endif
     while (1) {
         epoller_->poll(active_channels_);
         for ( const auto& channel : active_channels_ ) 
         {
+#ifdef DEBUG_OUTPUT
             printf("[DEBUG] EventLoop::loop eventloop: channel_fd is %d\n", channel->fd());
+#endif
             channel->handle_event();
         }
         active_channels_.clear();
         do_pending_func();
     }
-    printf("[DEBUG] EventLoop::loop %d stop looping\n", this);
+#ifdef DEBUG_OUTPUT
+    printf("[DEBUG] EventLoop::loop %d stop looping\n", reinterpret_cast<int>(this));
+#endif
 }
 
 void EventLoop::queue_in_loop(const Func& cb)

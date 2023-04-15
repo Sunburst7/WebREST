@@ -39,8 +39,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/WebREST-shared.dir/WebREST/server/echo.cc.o.d"
   "CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.o"
   "CMakeFiles/WebREST-shared.dir/WebREST/server/http.cc.o.d"
-  "lib/libWebREST-shared.pdb"
-  "lib/libWebREST-shared.so"
+  "WebREST/lib/libWebREST-shared.pdb"
+  "WebREST/lib/libWebREST-shared.so"
 )
 
 # Per-language clean rules from dependency scanning.

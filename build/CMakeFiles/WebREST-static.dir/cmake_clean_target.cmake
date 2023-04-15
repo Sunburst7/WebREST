@@ -1,3 +1,3 @@
 file(REMOVE_RECURSE
-  "lib/libWebREST-static.a"
+  "WebREST/lib/libWebREST-static.a"
 )

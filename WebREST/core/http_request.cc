@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-07 22:40:31
- * @LastEditTime: 2023-04-13 00:41:27
+ * @LastEditTime: 2023-04-14 21:57:57
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /Enhance_Tiny_muduo/WebREST/core/http_request.cc
+ * @FilePath: /WebREST/WebREST/core/http_request.cc
  */
 
 #ifndef WebREST_HTTP_REQUEST_CC_
@@ -90,7 +90,6 @@ bool HttpRequest::set_request_line(const char* start, const char* end)
 
 bool HttpRequest::parse(Buffer* buf)
 {
-    // printf("Httprequest::parse:: buf\n%s\n", buf->peek_as_string().c_str());
     bool ok = true;
     while (true)
     {

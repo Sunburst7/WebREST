@@ -2,15 +2,7 @@
 /home/sunburst7/桌面/WebREST/build/CMakeFiles/WebREST-shared.dir
 /home/sunburst7/桌面/WebREST/build/CMakeFiles/edit_cache.dir
 /home/sunburst7/桌面/WebREST/build/CMakeFiles/rebuild_cache.dir
-/home/sunburst7/桌面/WebREST/build/CMakeFiles/list_install_components.dir
-/home/sunburst7/桌面/WebREST/build/CMakeFiles/install.dir
-/home/sunburst7/桌面/WebREST/build/CMakeFiles/install/local.dir
-/home/sunburst7/桌面/WebREST/build/CMakeFiles/install/strip.dir
 /home/sunburst7/桌面/WebREST/build/example/CMakeFiles/echo_test.dir
 /home/sunburst7/桌面/WebREST/build/example/CMakeFiles/http_test.dir
 /home/sunburst7/桌面/WebREST/build/example/CMakeFiles/edit_cache.dir
 /home/sunburst7/桌面/WebREST/build/example/CMakeFiles/rebuild_cache.dir
-/home/sunburst7/桌面/WebREST/build/example/CMakeFiles/list_install_components.dir
-/home/sunburst7/桌面/WebREST/build/example/CMakeFiles/install.dir
-/home/sunburst7/桌面/WebREST/build/example/CMakeFiles/install/local.dir
-/home/sunburst7/桌面/WebREST/build/example/CMakeFiles/install/strip.dir

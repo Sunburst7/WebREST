@@ -2,7 +2,7 @@
  * @Author: sunburst7 1064658281@qq.com
  * @Date: 2023-04-13 22:47:47
  * @LastEditors: sunburst7 1064658281@qq.com
- * @LastEditTime: 2023-04-14 01:28:53
+ * @LastEditTime: 2023-04-14 22:01:24
  * @FilePath: /WebREST/WebREST/core/timer_queue.cc
  * @Description: 定时器队列
  * 
@@ -59,7 +59,9 @@ void TimerQueue::handle_read()
     uint64_t read_byte; // containing the number of expirations that have occurred
     ssize_t readn = ::read(timerfd_, &read_byte, sizeof read_byte);
     if (readn != sizeof(read_byte))
+#ifdef DEBUG_OUTPUT
         printf("[DEBUG] TimerQueue::handle_read read system error\n");
+#endif
     
     // 找出所有到期时间小于当前时间的定时器，并复制到active_timer_中
     active_timers_.clear();

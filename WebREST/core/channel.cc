@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-03-31 23:01:35
- * @LastEditTime: 2023-04-13 01:26:01
+ * @LastEditTime: 2023-04-14 21:52:49
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /Enhance_Tiny_muduo/WebREST/core/channel.cc
+ * @FilePath: /WebREST/WebREST/core/channel.cc
  */
 
 #ifndef WebREST_CHANNEL_CC_
@@ -39,7 +39,9 @@ void Channel::remove()
 
 void Channel::handle_event()
 {
+#ifdef DEBUG_OUTPUT
     printf("[DEBUG] Channel::handle_event  revents=%d\n", revents_);
+#endif
     if ( (revents_ & EPOLLHUP) && !(revents_ & EPOLLIN))
         if (close_cb_) close_cb_();
 

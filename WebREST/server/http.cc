@@ -1,7 +1,7 @@
 /*
  * @Author: HH
  * @Date: 2023-04-08 23:24:14
- * @LastEditTime: 2023-04-14 03:15:25
+ * @LastEditTime: 2023-04-14 22:02:27
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
  * @FilePath: /WebREST/WebREST/server/http.cc
@@ -47,7 +47,9 @@ void HttpServer::onIdle(std::weak_ptr<TcpConnection>& connection) {
     {
         if (TimeStamp::add_time(conn->last_message(), kConnectionTimeout) < TimeStamp::now()) 
         {
-            printf("[DEBUG] %s HttpServer::HandleIdleConnection\n", TimeStamp::now().to_format_string().data()); 
+#ifdef DEBUG_OUTPUT
+            printf("[DEBUG] %s HttpServer::onIdle\n", TimeStamp::now().to_format_string().data()); 
+#endif
             conn->shutdown();
         } 
         else 
@@ -57,7 +59,9 @@ void HttpServer::onIdle(std::weak_ptr<TcpConnection>& connection) {
 
 void HttpServer::onConnection(const TcpConnectionPtr& conn)
 {
+#ifdef DEBUG_OUTPUT
     printf("[DEBUG] HttpServer::onConnection new connection come\n");
+#endif
     // 创建一个每隔kCOnnectionTimeout就检查是否需要关闭连接的定时函数
     if (auto_close_idle_connection_)
     {
@@ -67,13 +71,11 @@ void HttpServer::onConnection(const TcpConnectionPtr& conn)
 
 void HttpServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer)
 {
-    // printf("onMessage\n%s\n", buffer->peek_as_string().c_str());
     conn->set_last_message(TimeStamp::now());   // 更新最后一次消息传送的时间
     if (conn->is_shutdown()) return;
     HttpRequest req;
     if (!req.parse(buffer))
     {
-        // printf("onMessage: parse err!\n");
         conn->send("HTTP/1.1 400 Bad Request\r\n\r\n");
         conn->shutdown();
     }
@@ -87,7 +89,6 @@ void HttpServer::onMessage(const TcpConnectionPtr& conn, Buffer* buffer)
 
 void HttpServer::onRequest(const TcpConnectionPtr& conn, const HttpRequest& request)
 {
-    // printf("onRequest\n");
     std::string connection_state = std::move(request.get_header("Connection"));
     bool close = (connection_state == "Close" || 
         (request.version() == HttpRequest::Version::kHttp10 && connection_state != "keep-alive"));
@@ -95,7 +96,7 @@ void HttpServer::onRequest(const TcpConnectionPtr& conn, const HttpRequest& requ
     std::string method = request.method_to_string();
     std::string path = request.path();
 
-    printf("[DEBUG] HttpServer::onRequest method: %s, path: %s\n", method.c_str(), path.c_str());
+    printf("[DEBUG] request method: %s, path: %s\n", method.c_str(), path.c_str());
 
     // 处理路由
     auto method_router_map = router_map_.find(method);

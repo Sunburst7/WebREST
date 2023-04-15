@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 04:06:10
- * @LastEditTime: 2023-04-13 01:29:19
+ * @LastEditTime: 2023-04-14 22:01:46
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /Enhance_Tiny_muduo/WebREST/core/tcp_connection.cc
+ * @FilePath: /WebREST/WebREST/core/tcp_connection.cc
  */
 
 #ifndef WebREST_TCP_CONNECTION_CC_
@@ -63,7 +63,9 @@ void TcpConnection::connection_destroyed()
 }
 
 void TcpConnection::shutdown() {
+#ifdef DEBUG_OUTPUT
     printf("[DEBUG] %d connection shutdown\n", this->fd());
+#endif
     if (!channel_->is_writing())
     {
         shutdown_ = true;
@@ -78,7 +80,9 @@ void TcpConnection::handle_read()
     int num = input_buf_.read_fd(socket_->fd(), err_num);
     if (num > 0)
     {
+#ifdef DEBUG_OUTPUT
         printf("[DEBUG] TcpConnection::handle_read get %d bytes\n", num);
+#endif
         message_callback_(shared_from_this(), &input_buf_);
     }
     else if (num == 0)
@@ -86,7 +90,11 @@ void TcpConnection::handle_read()
         handle_close();
     }
     else
+    {
+#ifdef DEBUG_OUTPUT
         printf("[DEBUG] TcpConnection::handle_read read system error: %d\n", err_num);
+#endif        
+    }
 }
 
 void TcpConnection::handle_write()
@@ -104,18 +112,24 @@ void TcpConnection::handle_write()
         }
         else
         {
+#ifdef DEBUG_OUTPUT
             printf("[DEBUG] TcpConnection::handle_write");
+#endif
         }
     }
     else
     {
+#ifdef DEBUG_OUTPUT
         printf("[DEBUG] TcpConnection::handle_write connection fd = %d is down, no more writing", socket_->fd());
+#endif
     }
 }
 
 void TcpConnection::handle_close()
 {
+#ifdef DEBUG_OUTPUT
     printf("[DEBUG] TcpConnection::handle_close %d close channel\n", this->fd());
+#endif
     state_ = kDisconnected;
     channel_->disbale_all();    // 删除内核注册符
      
@@ -134,9 +148,12 @@ void TcpConnection::send(const char* msg, int len)
         if (send_size >= 0)
             remaining -= send_size;
         else if (errno != EWOULDBLOCK)
+        {
+#ifdef DEBUG_OUTPUT
             printf("[DEBUG] TcpConnection::send write system error\n");
+#endif            
+        }
     }
-
     assert(remaining <= len);
     // 如果没有发送完全，将剩余的内容添加到buf中下次发送
     if (remaining > 0)

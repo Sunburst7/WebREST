@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-01 18:27:11
- * @LastEditTime: 2023-04-12 23:03:56
+ * @LastEditTime: 2023-04-14 21:57:29
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /Enhance_Tiny_muduo/WebREST/core/epoller.cc
+ * @FilePath: /WebREST/WebREST/core/epoller.cc
  */
 
 #ifndef WebREST_EPOLLER_CC_
@@ -42,7 +42,9 @@ void Epoller::fill_active_channels(int events_num, ChannelList& channels)
     {
         Channel* channel_ptr = static_cast<Channel*>(events_[i].data.ptr);
         channel_ptr->set_revents(events_[i].events);                        // epoll的类poll处理
+#ifdef DEBUG_OUTPUT
         printf("[DEBUG] Epoller::fill_active_channel new channel: %d\n", channel_ptr->fd());
+#endif
         channels.emplace_back(channel_ptr);
     }
     // if (events_num == static_cast<int>(events_.size()))

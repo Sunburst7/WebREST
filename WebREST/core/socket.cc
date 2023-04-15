@@ -1,10 +1,10 @@
 /*
  * @Author: HH
  * @Date: 2023-04-02 00:18:22
- * @LastEditTime: 2023-04-12 23:59:00
+ * @LastEditTime: 2023-04-14 21:58:10
  * @LastEditors: sunburst7 1064658281@qq.com
  * @Description: 
- * @FilePath: /Enhance_Tiny_muduo/WebREST/core/socket.cc
+ * @FilePath: /WebREST/WebREST/core/socket.cc
  */
 
 #ifndef WebREST_SOCKET_CC_
@@ -52,7 +52,9 @@ int Socket::accept(InetAddress& client_addr)
     int connfd = ::accept(sockfd_, client_addr.sock_addr(), &len);
     if ( connfd < 0 )
     {
+#ifdef DEBUG_OUTPUT
         printf("[DEBUG] Socket::accept errno is: %d\n", errno);
+#endif
         ::exit(0);
     }
     // assert( connfd >= 0 );
@@ -66,7 +68,9 @@ int Socket::accept(InetAddress& client_addr, int flag)
     int connfd = ::accept4(sockfd_, client_addr.sock_addr(), &len, flag);
     if ( connfd < 0 )
     {
+#ifdef DEBUG_OUTPUT
         printf("[DEBUG] Socket::accept errno is: %d\n", errno);
+#endif
         ::exit(0);
     }
     // assert( connfd >= 0 );

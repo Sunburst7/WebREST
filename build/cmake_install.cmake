@@ -42,34 +42,6 @@ if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/WebREST" TYPE FILE FILES
-    "/home/sunburst7/桌面/WebREST/WebREST/base/Thread.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/base/buffer.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/base/copyable.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/base/countdown_latch.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/base/non_copyable.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/base/timestamp.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/acceptor.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/callback.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/channel.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/epoller.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/eventloop.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/eventloop_thread.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/eventloop_thread_pool.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/http_request.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/http_response.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/inet_address.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/socket.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/tcp_connection.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/tcp_server.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/timer.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/core/timer_queue.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/server/echo.h"
-    "/home/sunburst7/桌面/WebREST/WebREST/server/http.h"
-    )
-endif()
-
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("/home/sunburst7/桌面/WebREST/build/example/cmake_install.cmake")
