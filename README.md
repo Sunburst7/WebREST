@@ -1,4 +1,5 @@
-# brief introduction
+$$WebREST$$
+## brief introduction
 Enhanced version of tiny-muduo for personal learing purposes
 feature:
 * Using muduo mode(muti-thread + IO multiplexing + one loop per thread) to deal with Concurrency
@@ -17,7 +18,7 @@ reference:
 [Webbench](https://github.com/EZLippi/WebBench) stress test:
 
 
-# build
+## build
 assuming you are in WebREST source directory, type in below: 
 ```bash
 mkdir build
@@ -32,7 +33,9 @@ then, everything is in /build
   * include: all .h file
   * lib: static library file and shared library file
 
-# use
+## use
+Refer to the complete project: https://github.com/Sunburst7/WebREST_example
+
 in you own project, you can create a directory called "third" in the root directory.
 and then, you copy whole /build/WebREST into the /third directory.
 I give a example of http-server
